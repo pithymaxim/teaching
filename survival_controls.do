@@ -27,4 +27,6 @@ stcox married age afqt hs postsec female i.year
 local married2 : di %4.3f exp(_b[married]) 
 * Make plot 
 stcurve, survival at(married=1) at(married=0) nodraw name(s2, replace) title("Cox survival curve, with controls") note(Married hazard ratio w/ controls: `married2')
+
+* Combine both plots into one figure
 graph combine s1 s2

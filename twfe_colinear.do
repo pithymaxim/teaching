@@ -1,5 +1,5 @@
 **********************************************************************************************
-*** Why can't we include experienc control when we have person and time fixed effects? *******
+*** Why can't we include experience control when we have person and time fixed effects? *******
 **********************************************************************************************
 
 bcuse wagepan, clear

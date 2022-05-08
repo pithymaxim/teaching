@@ -26,11 +26,11 @@ gen x = .5*rnormal() - .1*time
 gen y = x + .5*rnormal() -.2*time
 replace time = time + 1970
 
-twoway (connected y x time), ///
+twoway (connected y x time, color(orange green)), ///
        graphregion(color(white)) xtitle("") xline(1985.5) ///
 	   text(.2 1977 "Group with policy change", size(*1.5)) ///
-	   text(-3.2 1974 "No change", size(*1.5)) legend(off) ///
-	   text(-.2 1988.25 "Policy enacted", size(*1.5)) ylabel(none) name(g2, replace) title(No parallel trends) ///
+	   text(-3.2 1974 "No change", size(*1.5))  legend(off) ///
+	   text(-.2 1988.25 "Policy enacted", size(*1.5)) ylabel(none) name(g2, replace) title(No parallel trends, size(*1.5)) ///
 	   ysc(range(-3.5 1))
 	  
 graph export "$dropbox\Apps\Overleaf\MN4111\images\no_parallel_trends.pdf", replace 

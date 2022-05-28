@@ -1,4 +1,5 @@
-# Safewater regressions 
+# Safewater regressions
+library(foreign)
 lx <- read.dta("http://www.stata-press.com/data/r9/lifeexp.dta")
 # Remove those with missing safewater:
 lx <- lx[complete.cases(lx$safewater), ] 

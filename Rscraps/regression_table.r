@@ -6,7 +6,7 @@ auto <- read.dta("http://www.stata-press.com/data/r9/auto.dta")
 # https://declaredesign.org/r/estimatr/articles/regression-tables.html
 
 # Regression table 
-mod1 = lm(price ~ mpg                          , data=auto,se_type="stata")
+mod1 = lm(price ~ mpg                          , data=auto)
 mod2 = lm(price ~ mpg + trunk                  , data=auto)
 mod3 = lm(price ~ mpg + trunk + factor(foreign), data=auto)
 
@@ -17,4 +17,3 @@ stargazer(mod1,mod2,mod3, type = "html",  #we use html output to match our plann
           omit = c("Constant"),
           covariate.labels = c("Miles per Gallon","Trunk","Foreign"),
           se=starprep(mod1, mod2, mod3, clusters = auto$foreign, se_type = "stata"))
-######################################

@@ -8,7 +8,7 @@
 # calculate these standard errors.
 
 # Notes:
-# --This option works in stargazer <<if>> N does not change across colums:
+# --This simpler option works in stargazer <<if>> N does not change across colums:
 #      se=starprep(mod1, mod2, mod3, clusters = auto$foreign, se_type = "stata")
 # --lm_robust() does not work with stargazer (https://stackoverflow.com/questions/59224229/why-does-stargazer-give-me-a-table-of-output-for-my-lm-regression-output-but-not)
 # --Example of using coeftest to adjust standard errors: https://evalf21.classes.andrewheiss.com/example/standard-errors/

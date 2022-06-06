@@ -8,7 +8,7 @@
 # calculate these standard errors.
 
 # Notes:
-# --This simpler option works in stargazer <<if>> N does not change across colums:
+# --This option works in stargazer <<if>> N does not change across colums:
 #      se=starprep(mod1, mod2, mod3, clusters = auto$foreign, se_type = "stata")
 # --lm_robust() does not work with stargazer (https://stackoverflow.com/questions/59224229/why-does-stargazer-give-me-a-table-of-output-for-my-lm-regression-output-but-not)
 # --Example of using coeftest to adjust standard errors: https://evalf21.classes.andrewheiss.com/example/standard-errors/
@@ -41,7 +41,8 @@ outcome_means = list(mod0, mod1, mod2, mod3) %>% map(pluck,"fitted.values") %>% 
 stargazer(mod0,mod1,mod2,mod3, type = "html",  #we use html output to match our planned R Markdown output
           title = "My price models", out = "test.html", 
           dep.var.labels = "Price", omit.stat = c("f","ser","adj.rsq"),
-          add.lines = list(c("Outcome mean", round(outcome_means,2))),
+          add.lines = list(c("Outcome mean", round(outcome_means,2)), 
+                           c("Fixed effects","","","","x")),
           omit = c("Constant"),
           covariate.labels = c("Miles per Gallon","Trunk","Foreign"),
           se=list(se0,se1,se2,se3),

@@ -29,7 +29,7 @@ mod2 = lm(price ~ mpg + trunk                  , data=auto, subset = (price>4500
 mod3 = lm(price ~ mpg + trunk + factor(foreign), data=auto)
 
 # Save cluster and het. robust standard errors
-se0 = as.vector(summary(mod0)$coefficients[,"Std. Error"])
+se0 = as.vector(summary(mod0)$coefficients[,"Std. Error"]) # Here we just pull the existing standard errors from the regression object
 se1 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
 se2 = as.vector(coeftest(mod2,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
 se3 = as.vector(coeftest(mod3,vcov = vcovCL, type="HC1")[,"Std. Error"])

@@ -1,4 +1,5 @@
-# This code makes a regression table using stargazer where:
+# This code makes the HTML table here: https://htmlpreview.github.io/?https://github.com/pithymaxim/teaching/blob/main/Rscraps/reg_table_test.html
+# Wanted a regression table where:
 # (i) outcome means are reported in the table
 # (ii) N changes across columns 
 # (iii) columns have different standard error adjustments, including clusters

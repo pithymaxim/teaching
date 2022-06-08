@@ -39,7 +39,7 @@ outcome_means = list(mod0, mod1, mod2, mod3) %>% map(pluck,"fitted.values") %>% 
 
 # Make table
 stargazer(mod0,mod1,mod2,mod3, type = "html",  #we use html output to match our planned R Markdown output
-          title = "My price models", out = "test.html", 
+          title = "My price models", out = "reg_table_test.html", 
           dep.var.labels = "Price", omit.stat = c("f","ser","adj.rsq"),
           add.lines = list(c("Outcome mean", round(outcome_means,2)), 
                            c("Fixed effects","","","","x")),

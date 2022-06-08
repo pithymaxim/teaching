@@ -14,14 +14,16 @@
 # --lm_robust() does not work with stargazer (https://stackoverflow.com/questions/59224229/why-does-stargazer-give-me-a-table-of-output-for-my-lm-regression-output-but-not)
 # --Example of using coeftest to adjust standard errors: https://evalf21.classes.andrewheiss.com/example/standard-errors/
 #########################################################
-library(foreign)
-library(stargazer)
+library(foreign)   # To use Stata .dta files
+library(stargazer) # For pretty tables 
 library(tidyverse) # Need this to use map_dbl
 library(estimatr)  # For starprep
 library(sandwich)  # Adjust standard errors
 library(lmtest)    # Recalculate model errors with sandwich functions with coeftest()
-auto <- read.dta("http://www.stata-press.com/data/r9/auto.dta")
 #########################################################
+
+# Load data 
+auto <- read.dta("http://www.stata-press.com/data/r9/auto.dta")
 
 # Estimate regressions using lm() 
 mod0 = lm(price ~ mpg                          , data=auto)
@@ -31,7 +33,7 @@ mod3 = lm(price ~ mpg + trunk + factor(foreign), data=auto)
 
 # Save cluster and het. robust standard errors
 se0 = as.vector(summary(mod0)$coefficients[,"Std. Error"]) # Here we just pull the existing standard errors from the regression object
-se1 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
+se1 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"]) # Cluster SEs at "foreign" level
 se2 = as.vector(coeftest(mod2,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
 se3 = as.vector(coeftest(mod3,vcov = vcovCL, type="HC1")[,"Std. Error"])
 
@@ -39,7 +41,7 @@ se3 = as.vector(coeftest(mod3,vcov = vcovCL, type="HC1")[,"Std. Error"])
 outcome_means = list(mod0, mod1, mod2, mod3) %>% map(pluck,"fitted.values") %>% map_dbl(mean)
 
 # Make table
-stargazer(mod0,mod1,mod2,mod3, type = "html",  #we use html output to match our planned R Markdown output
+stargazer(mod0,mod1,mod2,mod3, type = "html",  
           title = "My price models", out = "reg_table_test.html", 
           dep.var.labels = "Price", omit.stat = c("f","ser","adj.rsq"),
           add.lines = list(c("Outcome mean", round(outcome_means,2)), 

@@ -44,3 +44,6 @@ round(summary(lm(demeaned_wage ~ demeaned_married, data=wagepan))$coefficients, 
 ### Two way fixed effects 
 summary(felm(def_wage ~ married |nr + year| 0 | 0, wagepan), robust="T")
 
+# Interact with hisp (hisp gets dropped, that's OK)
+summary(felm(def_wage ~ married*hisp |nr + year| 0 | 0, wagepan), robust="T")
+

@@ -1,6 +1,7 @@
 library(wooldridge)
 library(lubridate)
 library(collapse)
+library(lfe)
 data("wagepan")
 
 #### Merge in CPI
@@ -21,5 +22,15 @@ wagepan = merge(wagepan,annual_cpi,by="year")
 wagepan$def_wage = wagepan$lwage - log(wagepan$Index)
 
 ### Estimate regression
+# Simple bivariate regression 
 lm(def_wage ~ married, data=wagepan)
+
+# Adding person fixed effects (uses lfe package)
+# After the "~" is a four-part formula: 
+# (1) Covariates
+# (2) Factors to be projected out (i.e., fixed effects)
+# (3) Instruments (set to 0 to not use)
+# (4) Level at which to cluster standard errors (set to 0 to not use)
+summary(felm(def_wage ~ married |nr | 0 | 0, wagepan), robust="T")
+
 

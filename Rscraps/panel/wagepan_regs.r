@@ -41,3 +41,6 @@ wagepan$demeaned_married = wagepan$married - ave(wagepan$married, wagepan$nr)
 # https://stackoverflow.com/questions/65341848/how-can-i-print-a-certain-number-of-decimals-digits-in-r-when-scipen-and-digits
 round(summary(lm(demeaned_wage ~ demeaned_married, data=wagepan))$coefficients, 4)
 
+### Two way fixed effects 
+summary(felm(def_wage ~ married |nr + year| 0 | 0, wagepan), robust="T")
+

@@ -23,7 +23,7 @@ wagepan$def_wage = wagepan$lwage - log(wagepan$Index)
 
 ### Estimate regression
 # Simple bivariate regression 
-lm(def_wage ~ married, data=wagepan)
+summary(lm(def_wage ~ married, data=wagepan))
 
 # Adding person fixed effects (uses lfe package)
 # After the "~" is a four-part formula: 
@@ -33,4 +33,11 @@ lm(def_wage ~ married, data=wagepan)
 # (4) Level at which to cluster standard errors (set to 0 to not use)
 summary(felm(def_wage ~ married |nr | 0 | 0, wagepan), robust="T")
 
+### Demeaning. Take group-level averages with "ave" function
+wagepan$demeaned_wage = wagepan$def_wage - ave(wagepan$def_wage, wagepan$nr)
+wagepan$demeaned_married = wagepan$married - ave(wagepan$married, wagepan$nr)
+
+# Showing the right number of decimals is annoying...
+# https://stackoverflow.com/questions/65341848/how-can-i-print-a-certain-number-of-decimals-digits-in-r-when-scipen-and-digits
+round(summary(lm(demeaned_wage ~ demeaned_married, data=wagepan))$coefficients, 4)
 

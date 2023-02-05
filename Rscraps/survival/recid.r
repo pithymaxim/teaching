@@ -12,4 +12,4 @@ km <- with(recid, Surv(durat, arrested))
 
 km_fit <- survfit(Surv(durat, arrested) ~ 1, data=recid)
 summary(km_fit)
-autoplot(km_fit)
+plot(km_fit)

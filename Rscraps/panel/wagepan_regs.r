@@ -42,6 +42,11 @@ wagepan$demeaned_married = wagepan$married - ave(wagepan$married, wagepan$nr)
 round(summary(lm(demeaned_wage ~ demeaned_married, data=wagepan))$coefficients, 4)
 
 ### Two way fixed effects 
+# What's with the "0 | 0" ? Explanation: 
+# The formula specification is a response variable followed by a four part formula. 
+# The first part consists of ordinary covariates, the second part consists of factors to be projected out. 
+# The third part is an IV-specification. The fourth part is a cluster specification for the standard errors. 
+# Source: https://rdrr.io/cran/lfe/man/felm.html
 summary(felm(def_wage ~ married |nr + year| 0 | 0, wagepan), robust="T")
 
 # Interact with hisp (hisp gets dropped, that's OK)

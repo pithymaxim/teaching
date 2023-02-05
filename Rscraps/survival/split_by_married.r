@@ -19,4 +19,7 @@ km_split <- survfit(Surv(durat, arrested) ~ married, data=recid)
 ggsurvplot(km_split, xscale=12, break.x.by=12, xlim=c(0,7*12),
           ylab="Share not yet arrested", xlab="Years since release")
 
+# Add p-value of log-rank test to plot (easy!)
+ggsurvplot(km_split, xscale=12, break.x.by=12, xlim=c(0,7*12),
+          ylab="Share not yet arrested", xlab="Years since release", pval=TRUE)
 

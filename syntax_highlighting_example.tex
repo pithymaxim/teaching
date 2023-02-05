@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{minted}
+\usepackage{tcolorbox}
+\begin{document}
+
+\section{Stata code with syntax highlighting}
+
+\begin{minted}{Stata}
+sysuse auto, clear
+
+global myvars weight headroom trunk mpg price
+global mysplitvar foreign
+
+eststo group1_means: estpost summarize $myvars if $mysplitvar == 0
+eststo group2_means: estpost summarize $myvars if $mysplitvar == 1
+eststo differences:  estpost ttest $myvars, by($mysplitvar) unequal
+
+*** Ouput table:
+esttab group1_means group2_means differences using balance.tex, replace
+\end{minted}
+
+\section{R code with syntax highlighting}
+
+\begin{minted}{R}
+library(vtable)
+labs <- c('Aggregate personal savings',
+          'Percent of population under 15',
+          'Percent of population over 75',
+          'DPI',
+          'Growth rate of DPI')
+sumtable(LifeCycleSavings,labels=labs, file='mytable.html')
+\end{minted}
+
+\section{R code with syntax highlighting and a box around it}
+
+\begin{tcolorbox}[title=My R code]
+\begin{minted}{R}
+library(vtable)
+labs <- c('Aggregate personal savings',
+          'Percent of population under 15',
+          'Percent of population over 75',
+          'DPI',
+          'Growth rate of DPI')
+\end{minted}
+\end{tcolorbox}
+
+
+\end{document}

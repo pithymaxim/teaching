@@ -3,10 +3,9 @@ library(survival)
 library(ggplot2)
 library(ggfortify)
 data("recid")
-recid$arrested = 1 - recid$cens
 
-# Make duration yearly?
-# recid$durat = recid$durat / 12 
+# Make the arrested indicator
+recid$arrested = 1 - recid$cens
 
 km <- with(recid, Surv(durat, arrested))
 

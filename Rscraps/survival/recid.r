@@ -13,10 +13,19 @@ km_fit <- survfit(Surv(durat, arrested) ~ 1, data=recid)
 summary(km_fit)
 plot(km_fit)
 
-### Make the hazard.  https://stackoverflow.com/a/67596112/1810279
+#### Plot hazards (recid data) https://stackoverflow.com/a/67596112/1810279
+# Example of decreasing hazard (decreasing chance of arrest)
 library(bshazard)
 bs_fit <- bshazard(Surv(durat, arrested) ~ 1, data=recid)
 plot(bs_fit)
+
+#### Plot hazards (cancer data). 
+# Example of increasing hazard (increasing chance of death)
+library(foreign)
+library(bshazard)
+cancer = read.dta("http://www.stata-press.com/data/r9/cancer.dta")
+bs_fit <- bshazard(Surv(studytime , died) ~ 1, data=cancer, alpha=1)
+plot(bs_fit, conf.int= FALSE)
 
 # To show raw hazard:
 df = fortify(km_fit)

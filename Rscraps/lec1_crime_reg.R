@@ -1,0 +1,6 @@
+library(lmtest)
+library(sandwich)
+library(wooldridge)
+data("crime1")
+mymodel = lm(narr86 ~ inc86, data=crime1)
+coeftest(mymodel, vcov = vcovHC(mymodel, type="HC1"))

@@ -13,4 +13,4 @@ mymodel = lm(narr86 ~ inc86, data=crime1)
 # Make robust standard errors 
 robust_SEs = as.vector(coeftest(mymodel, vcov = vcovHC(mymodel, type="HC1"))[,"Std. Error"])
 # Show in table
-stargazer(mymodel,se=robust_SEs, type="text")
+stargazer(mymodel,se=list(robust_SEs), type="text")

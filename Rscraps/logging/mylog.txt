@@ -1,3 +1,42 @@
-> # Step 1: Some math:
+
+> # Homework 1
+> # March 20, 2023 
+> # Jane Doe 
+>   
+> #########################################################
+> # Question 1: Math                             ##########
+> #########################################################
+> 
 > 1+2
 [1] 3
+
+> # I find that the answer is 3. 
+> 
+> ########################################################
+> # Question 2: Load data and run regression    ##########
+> ########################################################
+> 
+> data(mtcars)
+
+> summary(lm(mpg~disp, data=mtcars))
+
+Call:
+lm(formula = mpg ~ disp, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.8922 -2.2022 -0.9631  1.6272  7.2305 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 29.599855   1.229720  24.070  < 2e-16 ***
+disp        -0.041215   0.004712  -8.747 9.38e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.251 on 30 degrees of freedom
+Multiple R-squared:  0.7183,	Adjusted R-squared:  0.709 
+F-statistic: 76.51 on 1 and 30 DF,  p-value: 9.38e-10
+
+
+> # The coefficient is -0.04.

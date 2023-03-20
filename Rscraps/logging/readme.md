@@ -11,7 +11,7 @@ The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/te
 Say you have an R script saved as [`test_script.r`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/test_script.r). Then if you run that code using `source()` and enclose it in a `sink()` command, you will get the desired log output.
 
       sink("mylog.txt")
-      source('test_script.r', echo = TRUE)
+      source('test_script.r', echo = TRUE, max.deparse.length=Inf)
       sink()
       
 This makes `mylog.txt` contain:

@@ -8,7 +8,7 @@ The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/te
 
 ## 2. Using source() and sink() ## 
 
-Say you have an R script saved as [`test_script.r`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/test_script.r). Then if you run that code using `source()` and enclose it in a `sink()` command, you will get the desired log output.
+Say you have an R script saved as [`test_script.r`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/test_script.r). Then if you run that code using `source()` and enclose it in a `sink()` command, you will get the desired log output. `sink()` is R's "log" command. `source()` is a way to run entire R scripts using their filename.
 
       sink("mylog.txt")
       source('test_script.r', echo = TRUE, max.deparse.length=Inf)

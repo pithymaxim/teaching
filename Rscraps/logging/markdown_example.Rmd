@@ -1,0 +1,21 @@
+---
+title: "Homework 1"
+output: html_document
+author: "Jane Doe"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+---
+  
+# Question 1: Math #
+```{r}
+# Put your R code in this code chunk
+1+2
+```
+I find that the answer is 3. 
+
+# Question 2: Load data and run regression#
+```{r}
+data(mtcars)
+summary(lm(mpg~disp, data=mtcars))
+
+```
+The coefficient is -0.04.

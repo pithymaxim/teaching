@@ -1,4 +1,4 @@
-# Logging in R#
+# Logging in R #
 
 ## R Markdown Example ##
 

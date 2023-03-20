@@ -20,4 +20,4 @@ This makes `mylog.txt` contain:
         > 1+2
         [1] 3
 
-So when you're done writing your code, you can run the sink-source-sink chunk above to get log with everything in it.
+So when you're done writing your code, you can run the sink-source-sink chunk above to get log with everything in it. This is less pretty than Markdown but doesn't require additional syntax.

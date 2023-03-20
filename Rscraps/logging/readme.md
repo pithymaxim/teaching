@@ -14,10 +14,4 @@ Say you have an R script saved as [`test_script.r`](https://github.com/pithymaxi
       source('test_script.r', echo = TRUE, max.deparse.length=Inf)
       sink()
       
-This makes `mylog.txt` contain:
-
-        > # Step 1: Some math:
-        > 1+2
-        [1] 3
-
-So when you're done writing your code, you can run the sink-source-sink chunk above to get log with everything in it. This is less pretty than Markdown but doesn't require additional syntax.
+This makes [`mylog.txt`](). Note that it's still just a simple text file, but it shows all the comments, commands, and output. Comments (###) are used to demarcate the questions. Note that with this option you cannot show plots, although Markdown can.

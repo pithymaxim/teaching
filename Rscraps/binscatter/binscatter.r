@@ -26,10 +26,10 @@ binned_scatterplot <- function(data, x_var, y_var, num_bins=20, text_size=20, x_
   df$fitted = coef(model)[1] +  coef(model)[2]*df$x_mean + coef(model)[3]*(df$x_mean)^2
   
   if (missing(y_axis_label)) {
-    y_axis_label = str_to_title(paste0(y_var, " (Binned)")) 
+    y_axis_label = paste0(y_var, " (Binned)")
   }
   if (missing(x_axis_label)) {
-    y_axis_label = str_to_title(paste0(x_var, " (Binned)")) 
+    y_axis_label = paste0(x_var, " (Binned)")
   }
   
   # Make plot 

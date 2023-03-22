@@ -2,6 +2,10 @@
 
 This code provides a simple function for doing a binscatter in R. There are options to use a quadratic term but NOT to add control variables. 
 
+```r
+print(hello)
+```
+
 # Things tried #
 
 `binsreg` should be perfect for this but for some reason it fails on a maximally simple example, creating the scatter with no line.

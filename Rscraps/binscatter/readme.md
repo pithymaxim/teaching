@@ -2,7 +2,7 @@
 
 This code provides a simple function for doing a binscatter in R. There are options to use a quadratic term but NOT to add control variables. 
 
-```r
+```R
 print(hello)
 ```
 

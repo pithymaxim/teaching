@@ -9,7 +9,7 @@ To make a simple discrete histogram in R, use this code:
 
 ## Discrete overlaid histogram ## 
 
-This code makes an overlaid histogram 
+This code makes an overlaid histogram. See the [documentation](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization) for more.
 
     ggplot(mtcars) +
     geom_histogram(aes(x=carb, group=vs, fill=factor(vs)), 

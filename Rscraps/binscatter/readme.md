@@ -30,3 +30,6 @@ This code provides a simple function for doing a binscatter in R. There are opti
       3: In binsreg(x = disp, y = mpg, data = mtcars) :
         Too small effective sample size for dots. # of mass points or clusters used.
       4: In binsreg(x = disp, y = mpg, data = mtcars) : dots=c(0,0) used.
+
+I should have also been able to use R's `predict` function for this, but it gets [confused](https://stackoverflow.com/questions/27464893/getting-warning-newdata-had-1-row-but-variables-found-have-32-rows-on-pred) when you try to use it to make predictions using a x variable with different names. 
+

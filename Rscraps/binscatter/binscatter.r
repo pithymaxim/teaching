@@ -1,4 +1,4 @@
-binned_scatterplot <- function(data, x_var, y_var, num_bins=20, text_size=20, x_axis_label,y_axis_label,quadratic = FALSE) {
+binned_scatterplot <- function(data, x_var, y_var, num_bins=20, text_size=20, x_axis_label="",y_axis_label="",quadratic = FALSE) {
   
   # Create bins with roughly equal number of observations in each bin
   x_bin <- cut(data[[x_var]], breaks = unique(quantile(data[[x_var]], probs = seq(0, 1, 1/num_bins))), include.lowest = TRUE)

@@ -1,4 +1,6 @@
-# This is how #
+# Loading packages by default #
+
+Based on the guide [here](https://www.statmethods.net/interface/customizing.html).
 
 If you're tried of running 
  ```R        

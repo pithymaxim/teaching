@@ -36,3 +36,7 @@ print("Running custom Rprofile build by Jane Doe")
 library(wooldridge)
 library(ggplot2)
 ```
+
+Now when I open RStudio I see the highlighted message below:
+
+![image](https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png)

@@ -1,7 +1,5 @@
 # Loading packages by default #
 
-Based on the guide [here](https://www.statmethods.net/interface/customizing.html).
-
 If you're tried of running 
  ```R        
            library(rpackage)
@@ -39,4 +37,6 @@ library(ggplot2)
 
 Now when I open RStudio I see the highlighted message below:
 
-![image](https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png)
+![image](https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png | width=75)
+
+Based on the guide [here](https://www.statmethods.net/interface/customizing.html).

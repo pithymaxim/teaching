@@ -10,8 +10,6 @@ It's in R's `etc` folder. To find where where the `etc` folder is, run:
 ```R
 normalizePath(R.home())
 ```
-[//]: <> (Might also use this R code:    normalizePath(R.home(), winslash = "/", mustWork = FALSE) ) 
-
 In Windows, it's in this folder (or one like it):
 
         C:\Program Files\R\R-4.2.3\etc

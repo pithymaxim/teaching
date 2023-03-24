@@ -12,6 +12,8 @@ In Windows, it's in this folder (or one like it):
 
 To find where where the `etc` folder, run:
 
+```{r}
     normalizePath(R.home(), winslash = "/", mustWork = FALSE)
     # (If that doesn't work, just do)
     normalizePath(R.home())
+```

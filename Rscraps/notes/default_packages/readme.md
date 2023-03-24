@@ -1,18 +1,16 @@
 # Loading packages by default #
 
 If you're tried of running 
- ```R        
-           library(rpackage)
+ ```R       
+ library(rpackage)
 ```
 every time you make a new script, you can set your `Rprofile.site` file. This is R code that is run every time you open Rstudio. 
 
 It's in R's `etc` folder. To find where where the `etc` folder is, run:
 ```R
-    normalizePath(R.home(), winslash = "/", mustWork = FALSE)
-    # If that doesn't work, just do
-    normalizePath(R.home())
+normalizePath(R.home())
 ```
-[//]: <> (ashlad ) 
+[//]: <> (Might also use this R code:    normalizePath(R.home(), winslash = "/", mustWork = FALSE) ) 
 
 In Windows, it's in this folder (or one like it):
 

@@ -27,7 +27,7 @@ In Windows, you might be blocked from saving any changes. To get around this, fi
 Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. 
 
 ```R
-print("Running custom Rprofile build by Jane Doe")
+print("Running custom Rprofile build by pithymaxim")
 library(wooldridge)
 library(ggplot2)
 ```

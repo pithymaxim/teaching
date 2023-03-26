@@ -14,6 +14,25 @@ binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### R
                    x_axis_label="Displacement (binned)", y_axis_label = "MPG (binned)", quadratic=FALSE)
 ```
 
+# Using ggplot() commands # 
+
+Another way to do this is with the following code:
+```R
+library(ggplot2)
+library(wooldridge)
+data(twoyear)
+
+# Need to make this a factor variable otherwise ggplot makes an ugly legend
+twoyear$female = as.factor(twoyear$female)
+
+ggplot(data = twoyear, aes(x = stotal, y = lwage, color = female)) +
+  stat_summary_bin(fun='mean', bins=20, size=2, geom='point', aes(group=female)) + 
+  stat_smooth(data=subset(twoyear, female==1), method = "lm") +
+  stat_smooth(data=subset(twoyear, female==0), method = "lm")
+```
+It makes the plot below:
+<img width="517" alt="image" src="https://user-images.githubusercontent.com/6835110/227786677-5419a390-727d-43bd-a722-e46700e1a34a.png">
+
 # Things tried #
 
 `binsreg` should be perfect for this but for some reason it fails on a maximally simple example, creating the scatter with no line.

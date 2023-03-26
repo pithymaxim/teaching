@@ -1,0 +1,91 @@
+---------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\Class\Worksheet1 example_worksheet_dofile.log
+  log type:  text
+ opened on:  26 Mar 2021, 16:17:01
+
+. 
+. ***************************************************
+. *** Q1 ********************************************
+. ***************************************************
+. sysuse auto, clear
+(1978 Automobile Data)
+
+. ** (a)
+. regress price mpg
+
+      Source |       SS           df       MS      Number of obs   =        74
+-------------+----------------------------------   F(1, 72)        =     20.26
+       Model |   139449474         1   139449474   Prob > F        =    0.0000
+    Residual |   495615923        72  6883554.48   R-squared       =    0.2196
+-------------+----------------------------------   Adj R-squared   =    0.2087
+       Total |   635065396        73  8699525.97   Root MSE        =    2623.7
+
+------------------------------------------------------------------------------
+       price |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         mpg |  -238.8943   53.07669    -4.50   0.000    -344.7008   -133.0879
+       _cons |   11253.06   1170.813     9.61   0.000     8919.088    13587.03
+------------------------------------------------------------------------------
+
+. display "Response in price to 3 more miles per gallon: " _b[mpg]*3
+Response in price to 3 more miles per gallon: -716.68304
+
+. 
+. ** (b)
+. * Calculate share of cars that are foreign
+. sum foreign
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     foreign |         74    .2972973    .4601885          0          1
+
+. 
+. ***************************************************
+. *** Q2 ********************************************
+. ***************************************************
+. bcuse recid, clear 
+
+Contains data from http://fmwww.bc.edu/ec-p/data/wooldridge/recid.dta
+  obs:         1,445                          
+ vars:            18                          26 Jan 2000 12:16
+ size:       104,040                          
+---------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+---------------------------------------------------------------------------------------------------------------------------
+black           float   %9.0g                 
+alcohol         float   %9.0g                 
+drugs           float   %9.0g                 
+super           float   %9.0g                 
+married         float   %9.0g                 
+felon           float   %9.0g                 
+workprg         float   %9.0g                 
+property        float   %9.0g                 
+person          float   %9.0g                 
+priors          float   %9.0g                 
+educ            float   %9.0g                 
+rules           float   %9.0g                 
+age             float   %9.0g                 
+tserved         float   %9.0g                 
+follow          float   %9.0g                 
+durat           float   %9.0g                 
+cens            float   %9.0g                 
+ldurat          float   %9.0g                 
+---------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+
+. 
+. ** (a)
+. * Count number of observations
+. count 
+  1,445
+
+. 
+. 
+. log close 
+      name:  <unnamed>
+       log:  C:\Users\Class\Worksheet1 example_worksheet_dofile.log
+  log type:  text
+ closed on:  26 Mar 2021, 16:17:02
+---------------------------------------------------------------------------------------------------------------------------

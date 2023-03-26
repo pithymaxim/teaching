@@ -16,7 +16,7 @@ binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### R
 
 # Using ggplot() commands # 
 
-Another way to do this is with the following code:
+Another way to do this is with the following code. Here I show how you can easily split by the variable `female`.
 ```R
 library(ggplot2)
 library(wooldridge)

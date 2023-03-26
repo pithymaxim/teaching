@@ -16,7 +16,18 @@ binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### R
 
 # Using ggplot() commands # 
 
-Another way to do this is with the following code. Here I show how you can easily split by the variable `female`.
+Another way to do this is with `stat_summary_bin` and `stat_smooth` from `ggplot`. Here's a simple example:
+```R
+library(ggplot2)
+ggplot(data = mtcars, aes(x = mpg, y = wt)) +
+  stat_summary_bin(fun='mean', bins=20, size=4, geom='point') + 
+  stat_smooth(method = "lm", se= FALSE) 
+```
+It makes this plot:
+<img width="555" alt="image" src="https://user-images.githubusercontent.com/6835110/227791221-c9f5f2a5-f25c-418b-b218-50cc03d365e6.png">
+
+## Splitting by group ## 
+Here I show how you can pretty easily split by a variable (`female` in this case).
 ```R
 library(ggplot2)
 library(wooldridge)

@@ -31,6 +31,7 @@ ggplot(data = twoyear, aes(x = stotal, y = lwage, color = female)) +
   stat_smooth(data=subset(twoyear, female==0), method = "lm")
 ```
 It makes the plot below:
+
 <img width="517" alt="image" src="https://user-images.githubusercontent.com/6835110/227786677-5419a390-727d-43bd-a722-e46700e1a34a.png">
 
 # Things tried #

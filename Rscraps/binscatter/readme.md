@@ -24,6 +24,7 @@ ggplot(data = mtcars, aes(x = mpg, y = wt)) +
   stat_smooth(method = "lm", se= FALSE) 
 ```
 It makes this plot:
+
 <img width="555" alt="image" src="https://user-images.githubusercontent.com/6835110/227791221-c9f5f2a5-f25c-418b-b218-50cc03d365e6.png">
 
 ## Splitting by group ## 

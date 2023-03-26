@@ -3,10 +3,13 @@ library(stargazer)
 
 auto <- read.dta("http://www.stata-press.com/data/r9/auto.dta")
 
+# Estimate model
 model = lm(price ~ mpg, data = auto)
 
+# Pull the default standard errors and calculate the robust standard errors
 se_standard = as.vector(summary(model)$coefficients[,"Std. Error"])
 se_robust  = as.vector(coeftest(model,vcov = vcovCL, type="HC1")[,"Std. Error"])
 
+# Show both in a table
 stargazer(model, model, type = "text",
           se = list(se_standard,se_robust))

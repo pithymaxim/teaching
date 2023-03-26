@@ -19,3 +19,8 @@ summary(lm(mpg~disp, data=mtcars))
 
 ```
 The coefficient is -0.04.
+
+# Question 3: Histogram # 
+```{r}
+hist(mtcars$mpg)
+````

@@ -48,5 +48,6 @@ Output:
           ------------------------------------------------------------------------------
 In R:
 ```R
-as.vector(coeftest(lm(mpg ~ disp +hp + factor(cyl) , data=mtcars),vcov = vcovHC, type="HC1")[,"Std. Error"])
+> as.vector(coeftest(lm(mpg ~ disp +hp + factor(cyl) , data=mtcars),vcov = vcovHC, type="HC1")[,"Std. Error"])
+[1] 1.789208108 0.008754031 0.010781349 1.446403698 2.785364276
 ```

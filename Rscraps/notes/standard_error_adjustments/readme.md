@@ -4,7 +4,7 @@ Making standard error adjustments in R can be complicated. If you're using the `
 
 Instead, I've found the best way is to make a vector containing your new standard errors (SEs), and then explicitly pass those to `stargazer`. 
 
-Here's the full code showing how to do this:
+Here's how:
 
 ```R
 library(stargazer) # For pretty tables 

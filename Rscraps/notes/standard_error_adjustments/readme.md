@@ -60,7 +60,20 @@ Here are two shorter ways to make robust standard errors if you don't need a tab
 This command from the `estimator` package works:
 ```R
 library(estimatr)
-lm_robust(mpg ~ disp +hp + factor(cyl) , data=mtcars, se_type="HC1")
+summary(lm_robust(mpg ~ disp +hp + factor(cyl) , data=mtcars, se_type="HC1"))
+```
+Output:
+```
+Coefficients:
+             Estimate Std. Error t value  Pr(>|t|) CI Lower   CI Upper DF
+(Intercept)  31.14773   1.789208 17.4087 3.325e-16 27.47658 34.8188822 27
+disp         -0.02604   0.008754 -2.9743 6.118e-03 -0.04400 -0.0080757 27
+hp           -0.02114   0.010781 -1.9604 6.034e-02 -0.04326  0.0009855 27
+factor(cyl)6 -4.04719   1.446404 -2.7981 9.367e-03 -7.01497 -1.0794157 27
+factor(cyl)8 -2.43193   2.785364 -0.8731 3.903e-01 -8.14702  3.2831694 27
+
+Multiple R-squared:  0.8001 ,	Adjusted R-squared:  0.7705 
+F-statistic: 25.95 on 4 and 27 DF,  p-value: 6.575e-09
 ```
 ### 2. Using coeftest ###
 We used this command above in the longer example, but in this case we're not trying to make a nice table so we can strip away the code that stores the vector of SEs.

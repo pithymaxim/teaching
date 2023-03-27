@@ -2,7 +2,7 @@
 
 Making standard error adjustments in R can be complicated. If you're using the `stargazer` package, which is the best way to make regression tables, you will find it breaks when you change the SEs in the `lm()` model objects directly. (`lm_robust()` doesn't work with `stargazer` either unfortunately!)
 
-Instead, I've found the best way is to make a vector containing your new standard errors, and then explicitly pass those to `stargazer`. 
+Instead, I've found the best way is to make a vector containing your new standard errors (SEs), and then explicitly pass those to `stargazer`. 
 
 Here's the full code showing how to do this:
 
@@ -26,9 +26,25 @@ The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` 
 
 The line making `se2` will always suffice to get "robust" standard errors. It uses specific arguments to match [how Stata calculates them]([url](https://stats.stackexchange.com/questions/117052/replicating-statas-robust-option-in-r)) (R does something slightly different by default).
 
-## But I don't want a table ## 
+## But I don't want a table! Two shorter options ## 
 
-Here's a shorter way to view our robust standard errors if you want to skip a few steps.
+Here are two shorter ways to view our robust standard errors if you want to skip a few steps.
+
+### 1. Using lm_robust() ###
+This command from the `estimator` package works:
+```R
+library(estimatr)
+lm_robust(mpg ~ disp +hp + factor(cyl) , data=mtcars, se_type="HC1")
+```
+### 2. Using coeftest ###
+We used this above in the longer example, but in this case we're not trying to make a nice table so we can strip away the code that stores the vector of SEs.
+```R
+library(lmtest)
+library(sandwich)
+
+mymodel = lm(mpg ~ disp +hp + factor(cyl) , data=mtcars)
+coeftest(mymodel, vcov = vcovHC(mymodel, type="HC1"))
+```
 
 ## Details: showing R code matching Stata's robust SEs ##
 

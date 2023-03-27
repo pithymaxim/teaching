@@ -26,7 +26,7 @@ The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` 
 
 The line making `se2` will always suffice to get "robust" standard errors. It uses specific arguments to match [how Stata calculates them]([url](https://stats.stackexchange.com/questions/117052/replicating-statas-robust-option-in-r)) (R does something slightly different by default).
 
-Here's the (abbreviated) output:
+Here's the (abbreviated) output from the `stargazer` line:
 ```
           ====================================================================
                                                          mpg                  

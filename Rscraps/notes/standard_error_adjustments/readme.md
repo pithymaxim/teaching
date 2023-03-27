@@ -22,3 +22,4 @@ se3 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~cyl)[,"Std. Error"]) # C
 stargazer(mod1,mod1,mod1, type = "text",  se=list(NULL,se2,se3), notes.align = "l",
           notes=c("Column 1: homoskedastic", "Column 2: robust standard errors", "Column 3: clustered standard errors."))
 ```
+The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` for the first model because there we're using the SEs that it comes with. The other two models will swap in the vectors we made above, `se2` and `se3`. 

@@ -9,7 +9,7 @@ Here's how:
 ```R
 library(stargazer) # For pretty tables 
 library(lmtest)    # For coeftest
-library(sandwich)  # For vcovCL
+library(sandwich)  # For vcovHC
 
 # Estimate a regression using lm() 
 mod1 = lm(mpg ~ disp +hp + factor(cyl) , data=mtcars)

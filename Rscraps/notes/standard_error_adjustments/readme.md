@@ -84,6 +84,15 @@ library(sandwich)
 mymodel = lm(mpg ~ disp +hp + factor(cyl) , data=mtcars)
 coeftest(mymodel, vcov = vcovHC(mymodel, type="HC1"))
 ```
+Output:
+```
+             Estimate Std. Error t value  Pr(>|t|)    
+(Intercept)  31.147731   1.789208 17.4087 3.325e-16 ***
+disp         -0.026038   0.008754 -2.9743  0.006118 ** 
+hp           -0.021136   0.010781 -1.9604  0.060339 .  
+factor(cyl)6 -4.047191   1.446404 -2.7981  0.009367 ** 
+factor(cyl)8 -2.431926   2.785364 -0.8731  0.390303    
+```
 
 ## Details: showing R code matching Stata's robust SEs ##
 

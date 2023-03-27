@@ -15,8 +15,8 @@ library(sandwich)  # For vcovCL
 mod1 = lm(mpg ~ disp +hp + factor(cyl) , data=mtcars)
 
 # Save vectors of clustered and robust standard errors for Columns 2 and 3
-se2 = as.vector(coeftest(mod1,vcov = vcovCL, type="HC1")[,"Std. Error"])     # Robust (Heteroskedasticity consistent) SEs
-se3 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~cyl)[,"Std. Error"]) # Cluster SEs at "cyl" level
+se2 = as.vector(coeftest(mod1,vcov = vcovHC, type="HC1")[,"Std. Error"])     # Robust (Heteroskedasticity consistent) SEs
+se3 = as.vector(coeftest(mod1,vcov = vcovHC, cluster = ~cyl)[,"Std. Error"]) # Cluster SEs at "cyl" level
 
 # Make table
 stargazer(mod1,mod1,mod1, type = "text",  se=list(NULL,se2,se3), notes.align = "l",

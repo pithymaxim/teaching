@@ -63,7 +63,7 @@ library(estimatr)
 lm_robust(mpg ~ disp +hp + factor(cyl) , data=mtcars, se_type="HC1")
 ```
 ### 2. Using coeftest ###
-We used this above in the longer example, but in this case we're not trying to make a nice table so we can strip away the code that stores the vector of SEs.
+We used this command above in the longer example, but in this case we're not trying to make a nice table so we can strip away the code that stores the vector of SEs.
 ```R
 library(lmtest)
 library(sandwich)

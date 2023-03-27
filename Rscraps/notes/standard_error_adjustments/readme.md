@@ -2,7 +2,7 @@
 
 Making standard error adjustments in R can be complicated. If you're using the `stargazer` package, which is the best way to make regression tables, you will find it breaks when you change the SEs in the `lm()` model objects directly. (`lm_robust()` doesn't work with `stargazer` either unfortunately!)
 
-Instead, you have to make a vector containing your new standard errors, and then explicitly pass those to `stargazer`. 
+Instead, I've found the best way is to make a vector containing your new standard errors, and then explicitly pass those to `stargazer`. 
 
 Here's the full code showing how to do this:
 

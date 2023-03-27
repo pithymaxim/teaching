@@ -54,7 +54,7 @@ Here's the (abbreviated) output from the `stargazer` line:
 ```
 ## Two faster options ## 
 
-Here are two shorter ways to view our robust standard errors if don't need a table.
+Here are two shorter ways to make robust standard errors if you don't need a table.
 
 ### 1. Using lm_robust() ###
 This command from the `estimator` package works:

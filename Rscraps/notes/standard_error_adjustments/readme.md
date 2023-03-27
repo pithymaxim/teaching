@@ -52,7 +52,7 @@ Here's the (abbreviated) output:
                                         Column 2: robust standard errors      
                                         Column 3: clustered standard errors. 
 ```
-## But I don't want a table! Two shorter options ## 
+## Two faster options ## 
 
 Here are two shorter ways to view our robust standard errors if you want to skip a few steps.
 

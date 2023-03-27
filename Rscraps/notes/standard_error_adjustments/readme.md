@@ -24,10 +24,11 @@ stargazer(mod1,mod1,mod1, type = "text",  se=list(NULL,se2,se3), notes.align = "
 ```
 The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` for the first model because there we're using the SEs that it comes with. The other two models will swap in the vectors we made above, `se2` and `se3`. 
 
-## Details: showing how to match Stata's robust SEs ##
+## Details: showing R code matching Stata's robust SEs ##
 
 In Stata:
 ```Stata
+* Load mtcars (from a github url)
 insheet using https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv
 regress mpg disp hp i.cyl , robust
 ```

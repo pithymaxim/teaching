@@ -54,7 +54,7 @@ Here's the (abbreviated) output:
 ```
 ## Two faster options ## 
 
-Here are two shorter ways to view our robust standard errors if you want to skip a few steps.
+Here are two shorter ways to view our robust standard errors if don't need a table.
 
 ### 1. Using lm_robust() ###
 This command from the `estimator` package works:

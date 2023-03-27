@@ -32,7 +32,7 @@ insheet using https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/
 regress mpg disp hp i.cyl , robust
 ```
 Output: 
-                Linear regression                               Number of obs     =         32
+                                                          Number of obs     =         32
                                                           F(4, 27)          =      25.95
                                                           Prob > F          =     0.0000
                                                           R-squared         =     0.8001

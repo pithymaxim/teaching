@@ -26,6 +26,31 @@ The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` 
 
 The line making `se2` will always suffice to get "robust" standard errors. It uses specific arguments to match [how Stata calculates them]([url](https://stats.stackexchange.com/questions/117052/replicating-statas-robust-option-in-r)) (R does something slightly different by default).
 
+Here's the (abbreviated) output:
+          ====================================================================
+                                                         mpg                  
+                                             (1)          (2)          (3)    
+          --------------------------------------------------------------------
+          disp                            -0.026**     -0.026***    -0.026*** 
+                                           (0.010)      (0.009)      (0.010)  
+
+          hp                               -0.021       -0.021**     -0.021   
+                                           (0.014)      (0.011)      (0.013)  
+
+          factor(cyl)6                    -4.047**     -4.047***    -4.047*** 
+                                           (1.689)      (1.446)      (1.535)  
+
+          factor(cyl)8                     -2.432        -2.432      -2.432   
+                                           (3.240)      (2.785)      (3.032)  
+
+          Constant                        31.148***    31.148***    31.148*** 
+                                           (1.767)      (1.789)      (1.927)  
+          ====================================================================
+          Note:                         *p<0.1; **p<0.05; ***p<0.01           
+                                        Column 1: homoskedastic               
+                                        Column 2: robust standard errors      
+                                        Column 3: clustered standard errors. 
+
 ## But I don't want a table! Two shorter options ## 
 
 Here are two shorter ways to view our robust standard errors if you want to skip a few steps.

@@ -27,6 +27,7 @@ The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` 
 The line making `se2` will always suffice to get "robust" standard errors. It uses specific arguments to match [how Stata calculates them]([url](https://stats.stackexchange.com/questions/117052/replicating-statas-robust-option-in-r)) (R does something slightly different by default).
 
 Here's the (abbreviated) output:
+```
           ====================================================================
                                                          mpg                  
                                              (1)          (2)          (3)    
@@ -50,7 +51,7 @@ Here's the (abbreviated) output:
                                         Column 1: homoskedastic               
                                         Column 2: robust standard errors      
                                         Column 3: clustered standard errors. 
-
+```
 ## But I don't want a table! Two shorter options ## 
 
 Here are two shorter ways to view our robust standard errors if you want to skip a few steps.

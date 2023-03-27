@@ -24,6 +24,8 @@ stargazer(mod1,mod1,mod1, type = "text",  se=list(NULL,se2,se3), notes.align = "
 ```
 The key argument in `stargazer` is `se=list(NULL,se2,se3)`. We set it to `NULL` for the first model because there we're using the SEs that it comes with. The other two models will swap in the vectors we made above, `se2` and `se3`. 
 
+The line making `se2` will always suffice to get "robust" standard errors. It uses specific arguments to match [how Stata calculates them]([url](https://stats.stackexchange.com/questions/117052/replicating-statas-robust-option-in-r)) (R does something slightly different by default).
+
 ## Details: showing R code matching Stata's robust SEs ##
 
 In Stata:

@@ -31,9 +31,18 @@ print("Running custom Rprofile build by pithymaxim")
 library(wooldridge)
 library(ggplot2)
 ```
-
 To see if it worked, close RStudio and open it again. The `print()` command confirms that my new additions to `Rprofile.site` have run, because I see it in the RStudio console:
 
 <img src="https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png" width="700">
+
+If you're sharing your code with others, you can run this command at the top of your code. It will show all the packages you've loaded:
+```R
+print((.packages()))
+```
+The output:
+```
+[1] "estimatr"   "sandwich"   "lmtest"     "zoo"        "stargazer"  "stats"      "graphics"   "grDevices" 
+ [9] "utils"      "datasets"   "wooldridge" "foreign"    "ggplot2"    "methods"    "base"      
+ ```
 
 Based on the guide [here](https://www.statmethods.net/interface/customizing.html).

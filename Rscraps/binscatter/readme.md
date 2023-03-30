@@ -1,22 +1,6 @@
-# Simple binscatter in R #
-
-This `binscatter.r` provides a simple function for doing a binscatter in R. There are options to use a quadratic term but NOT to add control variables. 
-
-The code below is an example of using `source_url` from `devtools` to load the function from GitHub, and then makes a simple binscatter using the `mtcars` data.
-```R
-library(devtools)
-library(ggplot2)
-
-source_url("https://raw.githubusercontent.com/pithymaxim/teaching/main/Rscraps/binscatter/binscatter.r")
-### Example of making binned scatterplot: 
-binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### Required arguments 
-                   num_bins=20, text_size=24,                             #### Optional arguments
-                   x_axis_label="Displacement (binned)", y_axis_label = "MPG (binned)", quadratic=FALSE)
-```
-
 # Using ggplot() commands # 
 
-Another way to do this is with `stat_summary_bin` and `stat_smooth` from `ggplot`. Here's a simple example:
+We use `stat_summary_bin` and `stat_smooth` from `ggplot`. Here's a simple example:
 ```R
 library(ggplot2)
 ggplot(data = mtcars, aes(x = mpg, y = wt)) +
@@ -49,6 +33,22 @@ ggplot(data = twoyear, aes(x = stotal, y = lwage, color = female)) +
 It makes the plot below:
 
 <img width="517" alt="image" src="https://user-images.githubusercontent.com/6835110/227786677-5419a390-727d-43bd-a722-e46700e1a34a.png">
+
+# Simple binscatter function in R #
+
+This `binscatter.r` provides a simple function for doing a binscatter in R. There are options to use a quadratic term but NOT to add control variables. 
+
+The code below is an example of using `source_url` from `devtools` to load the function from GitHub, and then makes a simple binscatter using the `mtcars` data.
+```R
+library(devtools)
+library(ggplot2)
+
+source_url("https://raw.githubusercontent.com/pithymaxim/teaching/main/Rscraps/binscatter/binscatter.r")
+### Example of making binned scatterplot: 
+binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### Required arguments 
+                   num_bins=20, text_size=24,                             #### Optional arguments
+                   x_axis_label="Displacement (binned)", y_axis_label = "MPG (binned)", quadratic=FALSE)
+```
 
 # Things tried #
 

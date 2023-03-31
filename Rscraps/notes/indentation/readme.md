@@ -2,7 +2,7 @@
 
 You should use indentation to help emphasize the structure of your code. Here is an example from a ggplot command.
 
-![image](https://user-images.githubusercontent.com/6835110/229142256-d8da8635-4103-48c4-9da6-06fc77da0589.png | width="60%")
+![image](https://user-images.githubusercontent.com/6835110/229142256-d8da8635-4103-48c4-9da6-06fc77da0589.png | width=60)
 
 Note the **two levels of indentation**.
 

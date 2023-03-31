@@ -26,10 +26,10 @@ library(lmtest)    # Recalculate model errors with sandwich functions with coeft
 auto <- read.dta("http://www.stata-press.com/data/r9/auto.dta")
 
 # Estimate regressions using lm() 
-mod0 = lm(price ~ mpg                          , data=auto)
-mod1 = lm(price ~ mpg                          , data=auto)
-mod2 = lm(price ~ mpg + trunk                  , data=auto, subset = (price>4500))
-mod3 = lm(price ~ mpg + trunk + factor(foreign), data=auto)
+reg0 = lm(price ~ mpg                          , data=auto)
+reg1 = lm(price ~ mpg                          , data=auto)
+reg2 = lm(price ~ mpg + trunk                  , data=auto, subset = (price>4500))
+reg3 = lm(price ~ mpg + trunk + factor(foreign), data=auto)
 
 # Save cluster and het. robust standard errors
 se0 = as.vector(summary(mod0)$coefficients[,"Std. Error"]) # Here we just pull the existing standard errors from the regression object
@@ -37,11 +37,16 @@ se1 = as.vector(coeftest(mod1,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
 se2 = as.vector(coeftest(mod2,vcov = vcovCL, cluster = ~foreign)[,"Std. Error"])
 se3 = as.vector(coeftest(mod3,vcov = vcovCL, type="HC1")[,"Std. Error"])
 
-# Calculate outcome means 
-outcome_means = list(mod0, mod1, mod2, mod3) %>% map(pluck,"fitted.values") %>% map_dbl(mean)
+## Calculate outcome means 
+# Using map/pluck 
+# outcome_means = list(mod0, mod1, mod2, mod3) %>% map(pluck,"fitted.values") %>% map_dbl(mean)
+
+# Using lapply 
+outcome_means = lapply(list(reg0, reg1, reg2, reg3), function(reg) mean(reg$model[,1]))
+outcome_means = unlist(outcome_means)
 
 # Make table
-stargazer(mod0,mod1,mod2,mod3, type = "html",  
+stargazer(reg0, reg1, reg2, reg3, type = "html",  
           title = "My price models", out = "reg_table_test.html", 
           dep.var.labels = "Price", omit.stat = c("f","ser","adj.rsq"),
           add.lines = list(c("Outcome mean", round(outcome_means,2)), 

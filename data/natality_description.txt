@@ -1,0 +1,28 @@
+------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+------------------------------------------------------------------------------
+dob_wk          byte    %8.0g                 Birth Day of Week 1 Sunday
+mager           byte    %8.0g                 Mother age
+mbrace          byte    %8.0g                 Mother race (bridged)
+dmar            byte    %8.0g                 Mother marital status
+meduc           byte    %8.0g                 Mother education
+fagecomb        byte    %8.0g                 Father age
+tbo_rec         byte    %8.0g                 Birth order
+illb_r          int     %8.0g                 Time since last birth
+previs          byte    %8.0g                 Number of prenatal visits
+m_ht_in         byte    %8.0g                 Mother heigh in inches
+bmi             double  %10.0g                BMI (13-69.9)
+mm_aicu         str1    %9s                   Admit to Intensive Care Y Yes
+apgar5r         byte    %8.0g                 Five Minute APGAR Recode 1 A score of 0-3
+apgar10r        byte    %8.0g                 Ten Minute APGAR Recode 1 A score of 0-3
+dbwt            int     %8.0g                 Birth weight (grams)
+ab_nicu         str1    %9s                   Admission to NICU Y Yes
+male            byte    %9.0g                 Male infant
+on_wic          byte    %9.0g                 On WIC
+weekend         byte    %9.0g                 Birth occurs on weekend
+gestation_weeks byte    %9.0g                 Estimated gestation length in weeks
+any_cigs_befo~g byte    %9.0g                 Any smoking before pregnancy
+any_cigs_duri~g byte    %9.0g                 Any smoking during pregnancy
+c_section       byte    %9.0g                 C-section
+------------------------------------------------------------------------------

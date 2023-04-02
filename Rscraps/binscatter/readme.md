@@ -11,6 +11,8 @@ It makes this plot:
 
 <img width="555" alt="image" src="https://user-images.githubusercontent.com/6835110/227791221-c9f5f2a5-f25c-418b-b218-50cc03d365e6.png">
 
+## Quadratic or Cubic fits ## 
+
 Also, it's easy to do a quadratic or cubic fit. You adjust the `stat_smooth` line. This makes a quadratic fit:
 ```R
 stat_smooth(method = "lm", formula = y ~ poly(x, 2, raw = TRUE), se= FALSE) 

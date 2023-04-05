@@ -8,7 +8,7 @@ df <- read_dta("https://www.stata-press.com/data/r17/nlsw88.dta")
 logit = glm(married ~ c_city + age, data=df , family = "binomial")
 
 # [2] Marginal effects from logit model 
-logit_margins = margins(model1)
+logit_margins = margins(logit)
 
 # [3] Linear Probability model (LPM)
 LPM = lm(married ~ c_city + age, data=df)

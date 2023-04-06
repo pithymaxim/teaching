@@ -8,7 +8,19 @@ The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/te
 
 ### Inline code in Markdown ###
 
-In general, you should avoid typing out your numeric results by hand. Markdown makes this easy. You can run R code inside your text by putting \`r \[your code here\] \'.
+In general, you should avoid typing out your numeric results by hand. Markdown makes this easy. You can run R code inside your text by putting \`r \[your code here\] \`. So just the two ticks and the lowercase "r" at the beginning. Here is some example Rmd code:
+
+      ```{r}
+      myreg = lm(gear ~ mpg + disp, data = mtcars)
+      ```
+
+      The coefficient on **miles per gallon** in my regression is `r myreg$coefficients["mpg"]`.
+
+      The rounded coefficient is `r round(myreg$coefficients["mpg"], digits=4)`.
+
+      To provide more interpretation, I'll say that if miles per gallon increases by 10, the outcome **gear** is predicted to increase by `r round(myreg$coefficients["mpg"] * 10, digits=3)`.
+
+      How many observations were there in my regression? I'm glad you asked. There were `r dim(myreg$model)[1]` observations in the regression.
 
 ## 2. Using source() and sink() ## 
 

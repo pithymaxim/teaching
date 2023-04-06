@@ -8,7 +8,7 @@ The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/te
 
 ### Inline code in Markdown ###
 
-In general, you should avoid typing out your numeric results by hand. Markdown makes this easy. You can run R code inside your text by putting \`r
+In general, you should avoid typing out your numeric results by hand. Markdown makes this easy. You can run R code inside your text by putting \`r \[your code here\] \'.
 
 ## 2. Using source() and sink() ## 
 

@@ -8,8 +8,9 @@ data(mtcars)
 
 # Show the number of rows and columns (shows rows first, then columns):
 dim(mtcars)
+# Output: [1] 32 11
 
-# Show variable names and their types
+# Show variable names and their types (this one is boring because every variable is numeric)
 str(mtcars)
 
 # Look at the first 10 rows
@@ -27,3 +28,15 @@ print(aggregate(mpg ~ gear, data = mtcars,
       digits=3)
 
 ```
+
+# Notes on the different commands 
+
+## sumtable ##
+
+The `sumtable` command makes some very slick summary statistics. Here is the output:
+
+<img width="353" alt="image" src="https://user-images.githubusercontent.com/6835110/230488731-efe04704-8918-453e-b60a-81b60a4096fa.png">
+
+## aggregate ##
+
+The `aggregate()` function is a way to show means <by group>

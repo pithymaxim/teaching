@@ -37,6 +37,21 @@ The `sumtable` command makes some very slick summary statistics. Here is the out
 
 <img width="353" alt="image" src="https://user-images.githubusercontent.com/6835110/230488731-efe04704-8918-453e-b60a-81b60a4096fa.png">
 
+## summary ##
+
+The built-in `summary(mtcars)` also works, I just find the output hader to read:
+
+```
+      mpg             cyl             disp             hp             drat      
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0   Min.   :2.760  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.080  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0   Median :3.695  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7   Mean   :3.597  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.920  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0   Max.   :4.930  
+ ...
+ ```
+
 ## aggregate ##
 
 The `aggregate()` function is a way to show means and other summary stats **by group**. In this example, we show the mean, SD, min, and max of `mpg` for every unique value of `gear`:

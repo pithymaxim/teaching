@@ -21,6 +21,10 @@ In general, you should avoid typing out your numeric results by hand. Markdown m
       To provide more interpretation, I'll say that if miles per gallon increases by 10, the outcome **gear** is predicted to increase by `r round(myreg$coefficients["mpg"] * 10, digits=3)`.
 
       How many observations were there in my regression? I'm glad you asked. There were `r dim(myreg$model)[1]` observations in the regression.
+Here is the output:
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/6835110/230498280-42ce9dc4-6891-4683-993b-0f071ba9d98e.png">
+
 
 ## 2. Using source() and sink() ## 
 

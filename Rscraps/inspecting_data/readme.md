@@ -39,4 +39,28 @@ The `sumtable` command makes some very slick summary statistics. Here is the out
 
 ## aggregate ##
 
-The `aggregate()` function is a way to show means <by group>
+The `aggregate()` function is a way to show means and other summary stats **by group**. In this example, we show the mean, SD, min, and max of `mpg` for every unique value of `gear`:
+
+```R
+print(aggregate(mpg ~ gear, data = mtcars, 
+                function(x) c(mean = mean(x), sd = sd(x), min=min(x), max=max(x))), 
+      digits=3)
+```
+The output is:
+```
+  gear mpg.mean mpg.sd mpg.min mpg.max
+1    3    16.11   3.37   10.40   21.50
+2    4    24.53   5.28   17.80   33.90
+3    5    21.38   6.66   15.00   30.40
+```
+This kind of thing is useful because it allows you to quickly assess average differences across groups and to locate any problem observations. If you only want means, the quick version is
+```R
+aggregate(mpg ~ gear, data = mtcars, FUN = mean) 
+```
+which returns
+```
+ gear      mpg
+1    3 16.10667
+2    4 24.53333
+3    5 21.38000
+```

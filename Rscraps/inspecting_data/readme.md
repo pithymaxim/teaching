@@ -2,7 +2,7 @@
 
 Here is R code showing the basic things you can do to inspect a dataset.
 
-```{r}
+```{R}
 # Load data 
 data(mtcars)
 

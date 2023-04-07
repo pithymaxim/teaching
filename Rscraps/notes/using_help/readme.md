@@ -7,6 +7,7 @@ library(ggplot2)
 ?geom_histogram
 ```
 We should see this in our RStudio output window:
+
 <img width="352" alt="image" src="https://user-images.githubusercontent.com/6835110/230634545-874d2149-6de3-4921-beff-52a6f21ca6f2.png">
 
 `geom_histogram` actually appears 2nd because ``ggplot`` has several commands with the same syntax.

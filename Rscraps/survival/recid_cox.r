@@ -28,3 +28,7 @@ Output:
 #   rules     0.049518  1.050765  0.014965  3.309 0.000936 ***
 #   alcohol   0.278774  1.321509  0.104167  2.676 0.007446 ** 
 #   married  -0.318500  0.727239  0.105094 -3.031 0.002440 ** 
+
+
+# Specification with interaction
+summary(coxph(Surv(durat, arrested) ~ alcohol*married, data = recid))

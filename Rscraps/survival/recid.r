@@ -7,9 +7,10 @@ data("recid")
 # Make the arrested indicator
 recid$arrested = 1 - recid$cens
 
-km <- with(recid, Surv(durat, arrested))
-
+# Make the Kaplan-Meier Survival Plot 
 km_fit <- survfit(Surv(durat, arrested) ~ 1, data=recid)
+
+# Output the Kaplan Meier table
 summary(km_fit)
 plot(km_fit)
 

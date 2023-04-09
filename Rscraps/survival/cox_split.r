@@ -22,7 +22,7 @@ res.cox.ctrls = coxph(Surv(durat, arrested) ~ married + black+
 # all other variables constant but still allow our married
 # indicator to vary.
 
-# We doe this in fake_df. 
+# We do this in fake_df. 
 # This code makes a dataframe with 2 rows. Each column is its average
 # from recid (repeated across rows) except for married, which 
 # is 0 or 1

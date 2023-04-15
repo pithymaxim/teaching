@@ -33,7 +33,7 @@ print(aggregate(mpg ~ gear, data = mtcars,
 
 ## sumtable ##
 
-The `sumtable` command makes some very slick summary statistics. Here is the output:
+The `sumtable` command from the package `vtable` makes some very slick summary statistics. Here is the output:
 
 <img width="353" alt="image" src="https://user-images.githubusercontent.com/6835110/230488731-efe04704-8918-453e-b60a-81b60a4096fa.png">
 

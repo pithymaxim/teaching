@@ -6,4 +6,8 @@ surv_df = read.csv("https://raw.githubusercontent.com/pithymaxim/teaching/main/d
 km_fit <- survfit(Surv(months, death)~1, data=surv_df)
 
 # Output the Kaplan Meier table
-summary(km_fit)
+data.frame(time = km_fit$time,
+                nrisk = km_fit$n.risk,
+                nevent = km_fit$n.event,
+                ncensor = km_fit$n.censor,
+                surv = km_fit$surv)

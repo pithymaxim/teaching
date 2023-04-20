@@ -2,6 +2,32 @@
 
 This code gives an example where R and Stata clusters yield the exact same standard errors.
 
+## R code ## 
+
+```R
+library(lmtest)
+library(sandwich)
+library(stargazer)
+
+data = read.csv("https://github.com/pithymaxim/teaching/raw/main/Rscraps/clustering/t.csv")
+
+# Define models
+model1 <- lm(y ~ x,     data = data)
+model2 <- lm(y ~ x + z, data = data)
+model3 <- lm(y ~ x + b, data = data)
+model4 <- lm(y ~ x + z + b, data = data)
+
+# Make clustered SEs
+se1 = as.vector(coeftest(model1,vcov = vcovCL,cluster = ~b, type="HC1")[,"Std. Error"])
+se2 = as.vector(coeftest(model2,vcov = vcovCL,cluster = ~b,  type="HC1")[,"Std. Error"])
+se3 = as.vector(coeftest(model3,vcov = vcovCL,cluster = ~z,  type="HC1")[,"Std. Error"])
+se4 = as.vector(coeftest(model4,vcov = vcovCL,cluster = ~n,  type="HC1")[,"Std. Error"])
+
+stargazer(model1,model2,model3,model4,type="text",
+          se=list(se1,se2,se3,se4), omit=c("Constant","z","b"),
+          omit.stat = c("f","ser","adj.rsq","rsq"),digits=7)
+```
+
 R output:
 ```
 ================================================================
@@ -18,7 +44,18 @@ Observations     100          100          100          100
 ================================================================
 Note:                                *p<0.1; **p<0.05; ***p<0.01
 ```
+## Stata code ##
 
+```
+insheet using https://github.com/pithymaxim/teaching/raw/main/Rscraps/clustering/t.csv, comma names clear 
+eststo clear 
+eststo: regress y x, cluster(b)
+eststo: regress y x z, cluster(b) 
+eststo: regress y x b , cluster(z)
+eststo: regress y x z b, cluster(n)
+
+esttab , b(7) se(7) keep(x)
+```
 Stata output: 
 ```
 . esttab ,  b(7) se(7) keep(x)

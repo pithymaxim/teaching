@@ -2,16 +2,7 @@ library(lmtest)
 library(sandwich)
 library(stargazer)
 
-set.seed(44)
-
-# Load data
-data <- data.frame(
-  x = rnorm(100),
-  z = rnorm(100),
-  b = rbinom(100, 1, 0.5),
-  n = rpois(100, 10)
-)
-data$y <- 0.5 + 2 * data$x + 0.1 * data$z + 0.5 * data$b - 0.1 * (data$x - 0.5) ^ 2 + rnorm(100)
+data = read.csv("https://github.com/pithymaxim/teaching/raw/main/Rscraps/clustering/t.csv")
 
 # Define models
 model1 <- lm(y ~ x,     data = data)
@@ -27,6 +18,4 @@ se4 = as.vector(coeftest(model4,vcov = vcovCL,cluster = ~n,  type="HC1")[,"Std. 
 
 stargazer(model1,model2,model3,model4,type="text",
           se=list(se1,se2,se3,se4), omit=c("Constant","z","b"),
-          omit.stat = c("f","ser","adj.rsq","rsq"),digits=10)
-
-          
+          omit.stat = c("f","ser","adj.rsq","rsq"),digits=7)

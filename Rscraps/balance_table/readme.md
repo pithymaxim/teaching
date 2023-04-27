@@ -2,7 +2,7 @@
 
 The code below makes this table using the `crosstable` and `flextable` packages:
 
-![image](https://user-images.githubusercontent.com/6835110/234988092-bfd63520-2937-4b87-b3d6-9b958c21b0c4.png)
+![image](https://user-images.githubusercontent.com/6835110/234989855-e004f29d-f8c2-444b-99e3-ec1eec1bd255.png)
 
 First, we load the libraries:
 ```r

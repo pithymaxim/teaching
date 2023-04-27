@@ -30,7 +30,7 @@ mtcars_labels = read.table(header=TRUE, text="
   ### Apply labels to the columns in mtcars
   mydata = mtcars  %>%  import_labels(mtcars_labels, name_from="name", label_from="label")
   ```
-To make some changes to the hypothesis tests that `crosstable` does, we need to create a special object that holds the arguments (code from [here]([url](https://rdrr.io/cran/crosstable/man/crosstable_test_args.html)))
+To make some changes to the hypothesis tests that `crosstable` does, we need to create a special object that holds the arguments. Code from [here](https://rdrr.io/cran/crosstable/man/crosstable_test_args.html).
 ```r
 my_test_args=crosstable_test_args()
 my_test_args$show_method = FALSE

@@ -26,6 +26,9 @@ mtcars_labels = read.table(header=TRUE, text="
   am    'Transmission'
   gear  'Number of forward gears'
   carb  'Number of carburetors'")
+  
+  ### Apply labels to the columns in mtcars
+  mydata = mtcars  %>%  import_labels(mtcars_labels, name_from="name", label_from="label")
   ```
 To make some changes to the hypothesis tests that `crosstable` does, we need to create a special object that holds the arguments (code from [here]([url](https://rdrr.io/cran/crosstable/man/crosstable_test_args.html)))
 ```r

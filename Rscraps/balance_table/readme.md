@@ -42,3 +42,11 @@ my_table = crosstable(mydata,by=vs, test=TRUE,
                       test_args=my_test_args) %>% 
   as_flextable()
 ```
+Next we just need to save the table. Saving it as an HTML is the easiest way of getting a publication-ready version:
+```r 
+save_as_html(my_table, path = "test_table.html")
+browseURL("test_table.html")
+```
+
+
+

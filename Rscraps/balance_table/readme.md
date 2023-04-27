@@ -35,3 +35,10 @@ To make some changes to the hypothesis tests that `crosstable` does, we need to 
 my_test_args=crosstable_test_args()
 my_test_args$show_method = FALSE
 ```
+Then we're ready to make the table. The `by` argument says how to split up the data. "vs" is a variable in mtcars. The table will have one column for vs=0 and one column for vs=1. `test=TRUE` says to report p-values in the last column testing if the two columns are different. Finally, the `funs` argument asks for the mean and the standard error, as is typical.
+```r
+my_table = crosstable(mydata,by=vs, test=TRUE, 
+                      funs=c(mean=mean, "std error"=sd),
+                      test_args=my_test_args) %>% 
+  as_flextable()
+```

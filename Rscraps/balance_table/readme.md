@@ -9,3 +9,21 @@ First, we load the libraries:
 library(crosstable)
 library(flextable)
 ```
+Then, we label all the variables using this code ([from here]([url](https://cran.r-project.org/web/packages/crosstable/vignettes/crosstable.html)))
+
+```r
+mtcars_labels = read.table(header=TRUE, text="
+  name  label
+  model 'Model'
+  mpg   'Miles/(US) gallon'
+  cyl   'Number of cylinders'
+  disp  'Displacement (cu.in.)'
+  hp    'Gross horsepower'
+  drat  'Rear axle ratio'
+  wt    'Weight (1000 lbs)'
+  qsec  '1/4 mile time'
+  vs    'Engine'
+  am    'Transmission'
+  gear  'Number of forward gears'
+  carb  'Number of carburetors'")
+  ```

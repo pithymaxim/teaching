@@ -1,6 +1,6 @@
 # Making a balance table in R # 
 
-The code below makes this table using the `crosstable` and `flextable` packages. (Full script [here]([url](https://github.com/pithymaxim/teaching/blob/main/Rscraps/balance_table/balance_table_example.r)))
+The code below makes this table using the `crosstable` and `flextable` packages. (Full script [here]([https://github.com/pithymaxim/teaching/blob/main/Rscraps/balance_table/balance_table_example.r])))
 
 ![image](https://user-images.githubusercontent.com/6835110/234989855-e004f29d-f8c2-444b-99e3-ec1eec1bd255.png)
 

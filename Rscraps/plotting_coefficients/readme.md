@@ -1,6 +1,6 @@
 # How to plot coefficients from regressions in R # 
 
-The `plot_summs()` command seems the best for plotting coefficients in R. See [here](https://jtools.jacob-long.com/reference/plot_summs.html) for documentation.
+The `plot_summs()` command seems the best for plotting coefficients in R. See [here](https://jtools.jacob-long.com/reference/plot_summs.html) for documentation. The full code for this example is [here](https://github.com/pithymaxim/teaching/blob/main/Rscraps/plotting_coefficients/plot_summs_example.r). 
 
 Let's say we are interested in the affect of previous alcohol or drug arrests on recidivism for a sample of released inmates (this is the `recid` data from the `wooldridge` package). We run three models: two LPMs and a logit with the same controls as the 2nd LPM. Instead of using log odds coefficients, we calculate the marginal effects from the logit.
 

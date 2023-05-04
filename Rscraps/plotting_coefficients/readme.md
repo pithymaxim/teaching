@@ -17,6 +17,15 @@ The `plot_summs()` command can make this plot:
 
 ![image](https://user-images.githubusercontent.com/6835110/236272653-68228283-7ea4-4d08-a645-a0d87fdd7ad5.png)
 
+Here's the command:
+
+```R
+plot_summs(mod1, mod2,mod3,
+           model.names=c("LPM: Fewer controls","LPM: More controls","Logit: More controls"),
+           coefs = c("Past alcohol violation"="alcohol","Past drug violation"="drugs"),
+           legend.title = "Model")
+```
+
 Key syntax: 
 
 - `model.names` is how we give a unique label to the different regressions

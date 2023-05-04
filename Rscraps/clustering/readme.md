@@ -72,3 +72,22 @@ N                     100             100             100             100
 Standard errors in parentheses
 * p<0.05, ** p<0.01, *** p<0.001
 ```
+
+## Use felm() in R? ## 
+
+Using felm's cluster syntax did not give the same results. This is the code I use (it couldn't estimate model3 but those were strange clusters).
+
+```R
+data = read.csv("https://github.com/pithymaxim/teaching/raw/main/Rscraps/clustering/t.csv")
+
+model1 <- felm(y ~ x | NULL | b,     data = data)
+model2 <- felm(y ~ x + z | NULL | b, data = data)
+# model3 <- felm(y ~ x + b | NULL | z, data = data)
+model4 <- felm(y ~ x + z + b | NULL | n, data = data)
+
+stargazer(model1,model2,model4,type="text",
+           omit=c("Constant","z","b"),
+          omit.stat = c("f","ser","adj.rsq","rsq"),digits=7)
+```
+
+

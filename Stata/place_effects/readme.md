@@ -5,5 +5,18 @@ Many papers in economics are about stable geographic difference in outcomes acro
 The core objects of interest in these analyses are "place effects." The simplest possible version of this is to write it out as follows:
 
 $$
-Y_{ip} = \Theta_p + e_{it}
+Y_{ip} = \Theta_p + e_{ip}
 $$
+
+This says the the outcome (e.g., BMI or medical spending) of person $i$ who lives in place $p$ is a function just of the place effect where they live $\Theta_p$ and an error term $e_{ip}$. 
+
+But this can be extended to include controls. 
+
+$$
+Y_{ip} = \Theta_p \mathbf{X_{ip}} + e_{ip}
+$$
+
+
+## Estimating simple place effects in Stata 
+
+Here's a demonstration estimating those simple place effect in Stata. 

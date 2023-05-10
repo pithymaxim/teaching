@@ -80,4 +80,29 @@ coefplot, sort keep(*.company_id) graphregion(color(white))
 It makes this plot:
 ![image](https://github.com/pithymaxim/teaching/assets/6835110/2fcccfa2-ce91-4119-9cc6-97557f6b41eb)
 
+## Analyzing results with and without controls 
+
+The `reghdfe` command provides a more flexible way to work with fixed effect estimates. Here we estimate the same fixed effects regressions but save the estimated fixed effects in columns called "company_FE" and "company_FE_controls" using `reghdfe`'s `absorb` option.
+```
+reghdfe price,                                              absorb(company_FE=company_id) vce(robust)
+reghdfe price weight trunk foreign mpg turn headroom rep78, absorb(company_FE_controls=company_id) vce(robust)
+```
+Now, how do the fixed effects change with controls? First we keep just one observation per company. Then we can see how the standard deviation of the fixed effects changes:
+```
+bys company_id: keep if _n==1
+sum company_FE company_FE_controls
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+  company_FE |         16    306.3866    2906.794  -1836.945   7877.721
+company_FE~s |         15    464.6463    2254.764  -1823.572   6196.286
+```
+The standard deviation gets somewhat smaller with the controls, decreasing from 2.9k to 2.2k. A histogram shows the slight scrunching of the distribution too.
+```
+twoway (hist company_FE         , color(red%20) width(500))  ///   
+       (hist company_FE_controls, color(green%20) width(500)), ///
+	   legend(order(1 "No controls" 2 "With controls")) xtitle(Estimated company fixed effect)
+```
+![image](https://github.com/pithymaxim/teaching/assets/6835110/64e2b80b-ae2f-40e7-a8de-b08d5c48e057)
+
+
 

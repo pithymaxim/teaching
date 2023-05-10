@@ -16,8 +16,19 @@ $$
 Y_{ip} = \Theta_p  + X_{ip}' \beta + e_{ip}
 $$
 
-Here we add $X_{ip}$, a set of controls including, say, age and race. $\beta$ is the set of coefficients on those controls. In this case, the place effects could change. They could shrink a lot if much of the variation in place level means was driven by selection. So a major check in any place effects analysis is how much the distribution shrinks with the addition of controls.
+Here we add $X_{ip}$, a set of controls including, say, age and race. $\beta$ is the set of coefficients on those controls. In this case, the place effects could change. They could shrink a lot if much of the variation in place level means was driven by selection. But these estimates are viewed as more likely to be causal, because now we're controlling for the traits of people who live there. So a major check in any place effects analysis is how much the distribution shrinks (or grows) with the addition of controls.
 
 ## Estimating simple place effects in Stata 
 
-Here's a demonstration estimating those simple place effect in Stata. 
+Here's a demonstration on how to estimate place effects with and without controls. We use the auto dataset in Stata. The car company is the "place" here.
+
+```
+sysuse auto, clear 
+ 
+* Extract car company name 
+split make, gen(m) parse(" ") 
+rename m1 company 
+ 
+* Make string company into numeric company_id. 
+encode company, gen(company_id) // AMC, Buick, Volvo, etc.
+```

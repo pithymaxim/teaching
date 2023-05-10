@@ -54,7 +54,7 @@ Linear regression                               Number of obs     =         74
 ... (output omitted)
 ```
 Notes:
-- The omitted company here is Buick. So any t-stat is testing the hypothesis that the company in question differs from Buick! 
+- The omitted company here is Buick. So any t-stat is testing the hypothesis that the company in question differs from Buick! Make sure you know what your omitted place here. I chose Buick because it's one of the biggest categories.
 - If we want to test for differences between two specific companies for example whether the place effect for company 1 (AMC) is significantly different from the place effect for company 2 (Audi), we would run 
 ``` 
 test 1.company_id=2.company_id

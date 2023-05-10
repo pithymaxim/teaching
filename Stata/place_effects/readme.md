@@ -13,7 +13,7 @@ This says the the outcome (e.g., BMI or medical spending) of person $i$ who live
 But this can be extended to include controls. 
 
 $$
-Y_{ip} = \Theta_p  + X \beta + e_{ip}
+Y_{ip} = \Theta_p  + X_{ip}' \beta + e_{ip}
 $$
 
 

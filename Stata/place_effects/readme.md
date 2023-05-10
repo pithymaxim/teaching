@@ -59,7 +59,7 @@ Notes:
 ``` 
 test 1.company_id=2.company_id
 ```
-- Most importantly, everything works just the same if we add control variables, for example below we add controls for weight and trunkL
+- Most importantly, everything works just the same if we add control variables, for example below we add controls for weight and trunk:
 ```
 regress price i.company_id weight trunk, robust 
 ```
@@ -70,7 +70,12 @@ After the regression, we can also test if the place effects are jointly signific
 ```
 testparm i.company_id
 ```
-This is a joint F-test on all of the place fixed effects. High p-values mean that we cannot reject that all of the place effects are equal to zero. We can think about this as testing whether there are any place effects in our context.
+This is a joint F-test on all of the place fixed effects. High p-values mean that we cannot reject that all of the place effects are equal to zero. We can think about this as testing whether there are any place effects in our context. In this context, we can reject that all company effects are zero:
+
+```
+       F( 16,    51) =   20.72
+            Prob > F =    0.0000
+```
 
 ## Plotting place effects
 You can run this `coefplot` command after your regression to visualize your estimated place effects:

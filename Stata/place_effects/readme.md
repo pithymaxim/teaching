@@ -77,5 +77,7 @@ You can run this `coefplot` command after your regression to visualize your esti
 ```
 coefplot, sort keep(*.company_id) graphregion(color(white))
 ```
+It makes this plot:
+![image](https://github.com/pithymaxim/teaching/assets/6835110/2fcccfa2-ce91-4119-9cc6-97557f6b41eb)
 
 

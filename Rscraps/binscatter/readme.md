@@ -52,6 +52,27 @@ binned_scatterplot(mtcars, x_var="disp", y_var="mpg",                     #### R
                    x_axis_label="Displacement (binned)", y_axis_label = "MPG (binned)", quadratic=FALSE)
 ```
 
+# Simple connected plot # 
+
+`binscatter` can also be used to show the averages for every discrete value of a variable (`binscatter... , discrete linetype(connect)`). Here's the R analogue:
+
+```R
+library(wooldridge)
+library(ggplot2)
+data(wagepan)
+
+ggplot(wagepan, aes(x = year, y = lwage)) +
+  stat_summary(fun.y = "mean", geom = "line", color = "blue", size = 1) +
+  stat_summary(fun.y = "mean", geom = "point", shape = 21, fill = "blue", color = "black", size = 4) +
+  xlab("Year") +
+  ylab("Log Wage") +
+  ggtitle("Mean Log Wage by Year") +
+  theme_bw() 
+```
+It makes this plot:
+![image](https://github.com/pithymaxim/teaching/assets/6835110/6965a2b7-a3e4-4034-93f4-f4e8b435424d)
+
+
 # Things tried #
 
 `binsreg` should be perfect for this but for some reason it fails on a maximally simple example, creating the scatter with no line.

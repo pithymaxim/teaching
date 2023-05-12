@@ -70,6 +70,7 @@ ggplot(wagepan, aes(x = year, y = lwage)) +
   theme_bw() 
 ```
 It makes this plot:
+
 ![image](https://github.com/pithymaxim/teaching/assets/6835110/6965a2b7-a3e4-4034-93f4-f4e8b435424d)
 
 

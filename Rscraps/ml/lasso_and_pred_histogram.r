@@ -26,6 +26,7 @@ lasso_model <- glmnet(X, Y, alpha = 1, lambda = selected_lambda)
 # Make predictions on new data
 predictions <- predict(lasso_model, newx = X[!train,])
 
+# Make a dataframe of predictions and truth 
 df = data.frame(pred = as.vector(predictions),
                 truth = loanapp$approve[!train])
 

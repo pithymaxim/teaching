@@ -30,10 +30,13 @@ Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldri
 print("Running custom Rprofile build by pithymaxim")
 library(wooldridge)
 library(ggplot2)
+print("Finished running custom Rprofile build by pithymaxim")
 ```
 To see if it worked, close RStudio and open it again. The `print()` command confirms that my new additions to `Rprofile.site` have run, because I see it in the RStudio console:
 
 <img src="https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png" width="700">
+
+* Note: always put a `print()` command at the very bottom! This tells you that no errors were encountered. If it doesn't reach the last print command, you'll know there was a bug.
 
 If you're sharing your code with others, you can run this command at the top of your code. It will show all the packages you've loaded:
 ```R

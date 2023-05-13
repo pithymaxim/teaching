@@ -44,4 +44,6 @@ ggplot(pred_df, aes(x = pred, fill = factor(truth))) +
   scale_fill_manual(values = c("green", "red"),
                     labels = c("Did not attrite", "Attrited early"),
                     name="True Attrition Status") +
-  theme_minimal()
+  theme_minimal() + 
+  geom_vline(xintercept = 0.6)+
+  geom_vline(xintercept = 0.4)

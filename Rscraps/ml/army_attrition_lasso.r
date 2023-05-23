@@ -16,7 +16,7 @@ train = as.logical(rbinom(n = dim(df)[1], size = 1, prob = .5))
 outcome = "early_attrite"
 # Make list of predictors 
 predictors = c("afqt", "accession_date", "female", "hs", "nohi", 
-                  "married", "year", "ed_level","accession_date")
+                  "married", "year", "ed_level")
 
 # First, figure out the optimal lambda 
 cv.lambda.lasso <- cv.glmnet(x=as.matrix(df[train,predictors]), 

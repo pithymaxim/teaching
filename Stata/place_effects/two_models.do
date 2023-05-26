@@ -13,6 +13,5 @@ eststo m2: regress price ib4.company_id mpg foreign, robust
 coefplot (m1, color(blue%60) ciopts(color(blue%20))) ///
          (m2, color(red%60) ciopts(color(red%20))), sort keep(*.company_id) graphregion(color(white)) ///
                 legend(position(3) ring(0) order(2 "Raw estimates" 4 "With controls") rows(2)) ///
-				xline(0) xtitle(Effect on price) xlabel(,format(%15.0fc))
-				
+				xline(0) xtitle(Effect on price) xlabel(,format(%15.0fc)) sort(1)
 				

@@ -1,3 +1,5 @@
+library(tableone)
+library(kableExtra)
 
 ############# EDIT THESE  ############################################
 # The name of your dataframe 

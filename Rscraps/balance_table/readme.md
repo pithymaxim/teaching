@@ -2,7 +2,8 @@
 
 ## Using CreateTableOne and kable ##
 
-![image](https://github.com/pithymaxim/teaching/assets/6835110/5ede387b-b693-4f31-801a-e3d01ada5b10)
+![image](https://github.com/pithymaxim/teaching/assets/6835110/35b60029-23c3-4971-9f16-cc57ac81807b)
+
 
 
 

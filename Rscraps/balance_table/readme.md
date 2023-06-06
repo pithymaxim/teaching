@@ -1,5 +1,12 @@
 # Making a balance table in R # 
 
+## Using CreateTableOne and kable ##
+
+![image](https://github.com/pithymaxim/teaching/assets/6835110/5ede387b-b693-4f31-801a-e3d01ada5b10)
+
+
+
+## Another option ## 
 The code below makes this table using the `crosstable` and `flextable` packages. Full script [here](https://github.com/pithymaxim/teaching/blob/main/Rscraps/balance_table/balance_table_example.r).
 
 ![image](https://user-images.githubusercontent.com/6835110/234989855-e004f29d-f8c2-444b-99e3-ec1eec1bd255.png)

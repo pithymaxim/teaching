@@ -2,6 +2,8 @@
 
 ## Using CreateTableOne and kable ##
 
+The code [here](https://github.com/pithymaxim/teaching/blob/main/Rscraps/balance_table/balance_table_kable.r) shows how to make the balance table below. It's written so that you should have to just change the details in the "EDIT THESE" box at the top.
+
 ![image](https://github.com/pithymaxim/teaching/assets/6835110/35b60029-23c3-4971-9f16-cc57ac81807b)
 
 

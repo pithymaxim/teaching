@@ -10,13 +10,16 @@ group1_name = "V engine"
 group2_name = "Straight engine"
 
 # The variables you want to show
-varlist = c("am","carb","disp","cyl","mpg","gear")
+varlist = c("am","carb","disp","cyl","mpg","gear","vs")
 
 # The categorical variables from that list
-factors = c(                   "cyl",      "gear")
+factors = c(                   "cyl",      "gear","vs")
+
+# The variable you want to split on
+split_by = "vs"
 
 # Pretty name labels. Same order as varlist 
-pretty_names = c("Manual","Number of carburetors","Displacement","Cylinders","MPG","Forward Gears")
+pretty_names = c("Manual","Number of carburetors","Displacement","Cylinders","MPG","Forward Gears","VS")
 
 # A note you want to add at the bottom
 my_note = "This table shows descriptive statistics for the two primary groups in the analysis. For continuous variables, we show means with standard deviations in parentheses. For categorical variables, we give the frequency of that value with the percent in parentheses."
@@ -24,7 +27,7 @@ my_note = "This table shows descriptive statistics for the two primary groups in
 
 # Create TableOne object 
 bt = CreateTableOne(vars = varlist, 
-                    factorVars = factors, strata = "vs" , 
+                    factorVars = factors, strata = split_by, 
                     data = get(df_name)) 
 
 
@@ -37,9 +40,15 @@ for (item in varlist) {
   pretty_name = pretty_names[which(varlist==item)]
   # For categorical variables, add extra rows (one for each value)
   if (item %in% factors) {
-    new_rownames <- c(new_rownames, paste0(pretty_name," (%)"), names(table(get(df_name)[item])))
-    index = which(new_rownames==paste0(pretty_name," (%)"))
-    rows_to_indent = c(rows_to_indent,seq(index+1,index+length(names(table(get(df_name)[item])))))
+    # Only shows multiple rows if there are 3 cats or more 
+    if (length(names(table(get(df_name)[item])))>2) {
+      new_rownames <- c(new_rownames, paste0(pretty_name," (%)"), names(table(get(df_name)[item])))
+      index = which(new_rownames==paste0(pretty_name," (%)"))
+      rows_to_indent = c(rows_to_indent,seq(index+1,index+length(names(table(get(df_name)[item])))))
+    } else {
+      new_rownames <- c(new_rownames, paste0(pretty_name," (%)"))
+    }
+    
   } else {
     new_rownames <- c(new_rownames, pretty_name)
   }
@@ -55,7 +64,14 @@ rownames(df2) = new_rownames
 # Delete last column (not used)
 df2 = df2[,-4]
 
-kable(df2, format = "html") %>% 
-  kable_styling() %>%
-  add_footnote(my_note) %>%
-  add_indent(rows_to_indent)
+
+if (length(rows_to_indent) > 0) {
+  kable(df2, format = "html") %>% 
+    kable_styling() %>%
+    add_footnote(my_note) %>%
+    add_indent(rows_to_indent)
+} else {
+  kable(df2, format = "html") %>% 
+    kable_styling() %>%
+    add_footnote(my_note) 
+}

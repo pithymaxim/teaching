@@ -1,7 +1,7 @@
 library(tableone)
 library(kableExtra)
 
-############# EDIT THESE  ############################################
+############# EDIT THESE  ###############################################################
 # The name of your dataframe 
 df_name = "mtcars" 
 
@@ -23,7 +23,7 @@ pretty_names = c("Manual","Number of carburetors","Displacement","Cylinders","MP
 
 # A note you want to add at the bottom
 my_note = "This table shows descriptive statistics for the two primary groups in the analysis. For continuous variables, we show means with standard deviations in parentheses. For categorical variables, we give the frequency of that value with the percent in parentheses."
-#####################################################################
+############### DO NOT EDIT BELOW ######################################################
 
 # Create TableOne object 
 bt = CreateTableOne(vars = varlist, 

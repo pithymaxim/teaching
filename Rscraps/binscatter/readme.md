@@ -36,6 +36,27 @@ It makes the plot below:
 
 <img width="517" alt="image" src="https://user-images.githubusercontent.com/6835110/227786677-5419a390-727d-43bd-a722-e46700e1a34a.png">
 
+## Connected plots of means at each discrete value (by group) ## 
+
+The code below makes this plot: average log wage every year, split by married and unmarried:
+![image](https://github.com/pithymaxim/teaching/assets/6835110/ac06006c-0c5a-43be-a44b-1e837aa46f84)
+
+
+```R
+library(wooldridge)
+library(ggplot2)
+data(wagepan)
+wagepan$married = as.factor(wagepan$married)
+ggplot(data = wagepan, aes(x = year, y = lwage, 
+                           factor = married, color = married, linetype = married)) +
+  stat_summary(fun = "mean", geom = "line") +
+  stat_summary(fun = "mean", geom = "point") +
+  theme_bw() +
+  scale_linetype_manual(values = c("solid", "dashed"), labels = c("Not Married", "Married")) +
+  scale_colour_manual(values = c("blue", "red"), labels = c("Not Married", "Married")) +
+  theme(legend.title = element_blank())
+```
+
 # Simple binscatter function in R #
 
 This `binscatter.r` provides a simple function for doing a binscatter in R. There are options to use a quadratic term but NOT to add control variables. 

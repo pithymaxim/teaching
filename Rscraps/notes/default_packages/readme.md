@@ -24,13 +24,13 @@ Now you need to find the `Rprofile.site` file and edit it. The top of my `Rprofi
 
 In Windows, you might be blocked from saving any changes. To get around this, first right-click Notepad (or any other text-editing app) and click "Run as administrator" and then open `Rprofile.site`. Now you should be allowed to make changes.
 
-Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. 
+Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. I tell it where dropbox is on my local computer and run my main startup script, startup.r.
 
 ```R
-print("Running custom Rprofile build by pithymaxim")
-library(wooldridge)
-library(ggplot2)
-print("Finished running custom Rprofile build by pithymaxim")
+print("Running Rprofile.site made by Maxim")
+dropbox = "C:\\Users\\MM\\Dropbox"
+source(file.path(dropbox,"berkeley/projects/R/startup.r"))
+print("Finished running Rprofile.site made by Maxim")
 ```
 To see if it worked, close RStudio and open it again. The `print()` command confirms that my new additions to `Rprofile.site` have run, because I see it in the RStudio console:
 

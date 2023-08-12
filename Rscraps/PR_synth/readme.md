@@ -39,3 +39,4 @@ source("code/show_fits_for_prereg.r")
 source("code/main_effects.r")
 ```
 The most important scripts are `synth_function.r`, which codes up the primary estimation strategies (augsynth with Ridge, vanilla synthetic control, GSYNTH) and an additional robustness check (earlier treatment date), and `main_effects.r`, which gives all the causal estimates. 
+ 

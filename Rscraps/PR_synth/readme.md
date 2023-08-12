@@ -12,7 +12,7 @@ The second dofile makes a monthly and quarterly state-level panel giving employm
 
 ## R code ## 
 
-The rest happens in R. All the R code is called from `master.R` in order. Since it's short, we reproduce `master.R` below:
+The rest happens in R. All the R code is called from `master.R` in order. Since it's short, we reproduce `master.R` below (except for loading the packages and setting the directory):
 
 ```R
 # Load Stata files, build outcomes, save to RDS

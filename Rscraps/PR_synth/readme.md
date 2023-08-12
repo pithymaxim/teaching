@@ -12,4 +12,27 @@ The second dofile makes a monthly and quarterly state-level panel giving employm
 
 ## R code ## 
 
-The rest happens in R. All the R code is called from `master.R` in order. 
+The rest happens in R. All the R code is called from `master.R` in order. Since it's short, we reproduce `master.R` below:
+
+```R
+# Load Stata files, build outcomes, save to RDS
+sink("code/R_side_build.log")
+source("code/R_side_build.r", echo = TRUE, max.deparse.length=Inf)
+sink()
+
+# Perform placebo runs for power calculations (takes ~6 hours without parallelizing)
+source("code/placebo_runs.r")
+
+# Make placebo table 
+source("code/make_placebo_table.r")
+
+# Load needed functions for causal estimates 
+source("code/synth_function.r")
+source("code/augsynth_plots.r")
+
+# Show the fits from 2001-2022
+source("code/show_fits_for_prereg.r")
+
+# Main estimates 
+source("code/main_effects.r")
+```

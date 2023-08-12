@@ -13,7 +13,7 @@ Next, the build is done in Stata using two dofiles:
 - `A1_import.do`
 - `A2_extract.do`
 
-The second dofile makes a monthly and quarterly state-level panel giving employment and wages in the temporary help services industry. 
+The second dofile makes a monthly and quarterly state-level panel giving employment and wages in the temporary help services industry. We include logs capture the output from our runs, and the data that `A2_extract.do` makes is in `inter/`.
 
 Finally, `desc_tables.do` makes our one descriptives table.
 

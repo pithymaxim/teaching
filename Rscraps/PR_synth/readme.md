@@ -7,4 +7,4 @@ The build is done in Stata using two dofiles:
 - A1
 - A2
 
-The rest happens in R. All the R code is called from `master.R` in order.
+The rest happens in R. All the R code is called from `master.R` in order. 

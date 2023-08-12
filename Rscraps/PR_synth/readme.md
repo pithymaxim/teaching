@@ -5,8 +5,8 @@ This is a guide to the code used for Helping out the outsourced by Massenkoff an
 ## Stata build ## 
 The build is done in Stata using two dofiles:
 
-- A1
-- A2
+- `A1_import.do`
+- `A2_extract.do`
 
 ## R code ## 
 

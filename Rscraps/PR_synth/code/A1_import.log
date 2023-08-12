@@ -1,0 +1,168 @@
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   16.0   Copyright 1985-2019 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     MP - Parallel Edition            College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+10-user 12-core Stata network perpetual license:
+       Serial number:  501606215251
+         Licensed to:  Massachusetts Institute of Technology
+                       Cambridge, MA
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  More than 2 billion observations are allowed; see help obs_advice.
+      4.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+. do "A1_import.do" 
+
+. global raw /pool001/maximm/inter/qcew 
+
+. 
+. foreach stub in state {
+  2.         clear   
+  3.         tempfile appended_data 
+  4.         save `appended_data', emptyok 
+  5. 
+.         forvalues yr = 2001/2022 {
+  6.                 display "On `yr'"
+  7.                 import delimited using "$raw/`yr'.q1-q4.singlefile.csv", c
+> lear
+  8.                 if ("`stub'"=="county") keep if agglvl_code==77  
+  9.                 if ("`stub'"=="msa")    keep if agglvl_code==47  
+ 10.                 if ("`stub'"=="state")  keep if agglvl_code==57 | agglvl_c
+> ode==50
+ 11.                 tostring disclosure_code, replace 
+ 12.                 drop  lq_disclosure_code oty_disclosure_code
+ 13.                 drop oty* lq* // unneeded variables giving year-on-year ch
+> anges 
+ 14.                 gen file_year = `yr'
+ 15.                 append using  `appended_data'
+ 16.                 save  `appended_data', replace 
+ 17.         }
+ 18.         label data "Made on ${S_DATE} in import.do by `c(username)'" 
+ 19.         save "$raw/`stub'_naics_5d.dta", replace 
+ 20. }
+(note: dataset contains 0 observations)
+file /tmp/St22767.000001 saved
+On 2001
+(42 vars, 14,318,532 obs)
+(14,147,064 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2002
+(42 vars, 14,322,428 obs)
+(14,150,644 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2003
+(42 vars, 14,347,072 obs)
+(14,174,808 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2004
+(42 vars, 14,364,328 obs)
+(14,191,804 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2005
+(42 vars, 14,412,936 obs)
+(14,239,968 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2006
+(42 vars, 14,453,980 obs)
+(14,280,704 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2007
+(42 vars, 14,438,464 obs)
+(14,265,688 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2008
+(42 vars, 14,490,872 obs)
+(14,317,632 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2009
+(42 vars, 14,435,352 obs)
+(14,261,700 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2010
+(42 vars, 14,400,684 obs)
+(14,225,652 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2011
+(42 vars, 14,242,900 obs)
+(14,069,604 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2012
+(42 vars, 14,225,156 obs)
+(14,052,080 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2013
+(42 vars, 14,269,264 obs)
+(14,096,844 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2014
+(42 vars, 14,276,508 obs)
+(14,103,920 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2015
+(42 vars, 14,307,736 obs)
+(14,135,140 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2016
+(42 vars, 14,296,616 obs)
+(14,123,896 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2017
+(42 vars, 14,246,584 obs)
+(14,074,908 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2018
+(42 vars, 14,302,748 obs)
+(14,130,912 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2019
+(42 vars, 14,353,496 obs)
+(14,181,504 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2020
+(42 vars, 14,411,040 obs)
+(14,238,780 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2021
+(42 vars, 14,527,228 obs)
+(14,354,428 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+On 2022
+(42 vars, 14,458,864 obs)
+(14,289,272 observations deleted)
+disclosure_code already string; no replace
+file /tmp/St22767.000001 saved
+file /pool001/maximm/inter/qcew/state_naics_5d.dta saved
+
+. 
+. 
+end of do-file

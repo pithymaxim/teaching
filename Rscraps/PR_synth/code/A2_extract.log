@@ -1,0 +1,387 @@
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   16.0   Copyright 1985-2019 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     MP - Parallel Edition            College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+10-user 12-core Stata network perpetual license:
+       Serial number:  501606215251
+         Licensed to:  Massachusetts Institute of Technology
+                       Cambridge, MA
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  More than 2 billion observations are allowed; see help obs_advice.
+      4.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+. do "A2_extract.do" 
+
+. global raw /pool001/maximm/inter/qcew 
+
+. global inter /home/maximm/qcew/inter/
+
+. 
+. local prereg_run 1
+
+. 
+. foreach stub in state {
+  2.         display "Starting `stub'"
+  3.         use using $raw/`stub'_naics_5d.dta, clear 
+  4. 
+.         * Encode area fips 
+.         encode area_fips, gen(area_fips_id)
+  5.         drop area_fips 
+  6.         rename area_fips_id area_fips
+  7. 
+.         gen qdate = yq(year,qtr)
+  8. 
+.         destring industry_code, replace 
+  9.         gen temp_only       = industry_code==56132
+ 10. 
+.         * Add state-level aggregate variables before 
+.         foreach var of varlist month1_emplvl month2_emplvl month3_emplvl tota
+> l_qtrly_wages avg_wkly_wage {
+ 11.                 bys qdate area_fips (agglvl_code): gen agg_st_`var' = `var
+> '[1]
+ 12.         }
+ 13. 
+.         * === Key drops: ==================== *
+.         keep if temp_only==1  // only the narrow temp industry 
+ 14.         keep if own_code == 5 // only privately-owned 
+ 15.         * =================================== *
+. 
+.         gen not_disclosed = disclosure_code=="N"
+ 16. 
+.         * === Make into balanced panel 
+.         destring area_fips, replace 
+ 17.         tsset area_fips qdate 
+ 18. 
+.         * === Add fake observations at the end so that <augsynth> works 
+.         if `prereg_run' {
+ 19.                 sum qdate 
+ 20.                 gen num_to_expand = 4 if qdate==r(max)
+ 21.                 expand num_to_expand, gen(fake_data)
+ 22.                 bys area_fips fake_data: gen nth_extra = _n if fake_data==
+> 1
+ 23.                 replace qdate = qdate + nth_extra if fake_data==1
+ 24.                 drop num_to_expand 
+ 25. 
+.                 * === Fill in missing values for fake added time periods 
+.                 foreach var of varlist month1_emplvl month2_emplvl month3_emp
+> lvl total_qtrly_wages avg_wkly_wage agg_st* {
+ 26.                         replace `var'=runiform() if fake_data==1 
+ 27.                 }
+ 28.         }
+ 29.         else {
+ 30.                 gen fake_data=.
+ 31.         }
+ 32. 
+.         * === Make more variables 
+.         gen stata_date = dofq(qdate)
+ 33.         replace qtr = quarter(stata_date)
+ 34.         replace year = year(stata_date)
+ 35.         gen qtr_emps = (month1_emplvl + month2_emplvl + month3_emplvl)/3
+ 36. 
+.         keep year stata_date qtr_emps area_fips qdate fake_data disclosure_co
+> de month?_emplvl qtr total_qtrly_wages not_disclosed avg_wkly_wage agg_st*
+ 37. 
+.         decode area_fips, gen(area_fips_orig)
+ 38.         destring area_fips_orig, replace 
+ 39.         
+.         gen state = floor(area_fips_orig/1000)
+ 40.         
+.         drop if inlist(state,72,78)
+ 41. 
+.         gen treated = state==34 & ((year==2023 & qtr >= 2) | (year==2024))
+ 42. 
+.         tab state 
+ 43. 
+.         * === Fixing missing 
+.         * This should make just 3 replacements 
+.         if ("`stub'"=="state") {
+ 44.                 display "Fixing missing"
+ 45.                 format stata_date %td 
+ 46.                 tab area_fips stata_date if not_disclosed==1
+ 47.                 bys area_fips_orig (stata_date): replace avg_wkly_wage = .
+> 5*(avg_wkly_wage[_n-1]+avg_wkly_wage[_n+1]) if not_disclosed==1
+ 48.                 display "Finished missing"
+ 49.         }
+ 50. 
+.         * month1_emplvl-month3_emplvl are equal to 0 twice
+.         foreach var of varlist month1_emplvl-month3_emplvl {
+ 51.                 bys area_fips_orig (stata_date): replace `var' = .5*(`var'
+> [_n-1]+`var'[_n+1]) if `var'==0
+ 52.                 }
+ 53. 
+.         * === Log and Log ratio wages:
+.         gen ln_avg_wkly_wage       = ln(avg_wkly_wage)
+ 54.         gen ln_avg_wkly_wage_ratio = ln(avg_wkly_wage) - ln(agg_st_avg_wkl
+> y_wage)
+ 55. 
+.         * === Save quarterly builds 
+.         sum 
+ 56.         label data "Made in A2_extract.do on ${S_DATE} by `c(username)'"
+ 57.         save $inter/temp_only_build_`stub'.dta, replace
+ 58. 
+.         if ("`stub'"=="state") {
+ 59.                 forvalues i = 1/3 {
+ 60.                         rename        month`i'_emplvl                month
+> _emplvl`i'
+ 61.                         rename agg_st_month`i'_emplvl         agg_st_month
+> _emplvl`i'
+ 62.                 }
+ 63.                 drop stata_date
+ 64.                 reshape long month_emplvl agg_st_month_emplvl, j(month) i(
+> year treated fake_data state disclosure_code qtr)
+ 65.                 replace month = month + (qtr-1)*3
+ 66.                 gen stata_date = mdy(month,1,year)
+ 67. 
+.                 gen date_2 = stata_date^2 
+ 68.                 gen date_3 = stata_date^3 
+ 69. 
+.                 * Seasonal adjustment 
+.                 reghdfe month_emplvl, absorb(i.state#(c.stata_date c.date_2 c
+> .date_3) i.state i.state#i.month) resid 
+ 70.                 predict month_emplvl_adj, resid 
+ 71. 
+.                 gegen state_mean_month_emplvl = mean(month_emplvl), by(state)
+ 72.                 replace month_emplvl_adj = month_emplvl_adj + state_mean_m
+> onth_emplvl
+ 73. 
+.                 * === Log and Log ratio monthly employment:
+.                 gen ln_month_emplvl       = ln(month_emplvl)
+ 74.                 gen ln_month_emplvl_ratio = ln(month_emplvl) - ln(agg_st_m
+> onth_emplvl)
+ 75. 
+.                 * === Save monthly build for states 
+.                 sum 
+ 76.                 label data "Made in A2_extract.do on ${S_DATE} by `c(usern
+> ame)'"
+ 77.                 save $inter/temp_only_build_`stub'_monthly.dta, replace
+ 78.         }
+ 79. }
+Starting state
+(Made on  8 Aug 2023 in import.do by maximm)
+industry_code: all characters numeric; replaced as long
+(3,790,592 observations deleted)
+(580 observations deleted)
+area_fips already numeric; no replace
+       panel variable:  area_fips (strongly balanced)
+        time variable:  qdate, 164 to 251
+                delta:  1 unit
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       qdate |      4,664       207.5     25.4045        164        251
+(4,611 missing values generated)
+(4,611 missing counts ignored; observations not deleted)
+(159 observations created)
+(4,664 missing values generated)
+(159 real changes made)
+variable month1_emplvl was long now double
+(159 real changes made)
+variable month2_emplvl was long now double
+(159 real changes made)
+variable month3_emplvl was long now double
+(159 real changes made)
+(159 real changes made)
+variable avg_wkly_wage was long now double
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+(159 real changes made)
+area_fips_orig: all characters numeric; replaced as long
+(182 observations deleted)
+
+      state |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         91        1.96        1.96
+          2 |         91        1.96        3.92
+          4 |         91        1.96        5.88
+          5 |         91        1.96        7.84
+          6 |         91        1.96        9.80
+          8 |         91        1.96       11.76
+          9 |         91        1.96       13.73
+         10 |         91        1.96       15.69
+         11 |         91        1.96       17.65
+         12 |         91        1.96       19.61
+         13 |         91        1.96       21.57
+         15 |         91        1.96       23.53
+         16 |         91        1.96       25.49
+         17 |         91        1.96       27.45
+         18 |         91        1.96       29.41
+         19 |         91        1.96       31.37
+         20 |         91        1.96       33.33
+         21 |         91        1.96       35.29
+         22 |         91        1.96       37.25
+         23 |         91        1.96       39.22
+         24 |         91        1.96       41.18
+         25 |         91        1.96       43.14
+         26 |         91        1.96       45.10
+         27 |         91        1.96       47.06
+         28 |         91        1.96       49.02
+         29 |         91        1.96       50.98
+         30 |         91        1.96       52.94
+         31 |         91        1.96       54.90
+         32 |         91        1.96       56.86
+         33 |         91        1.96       58.82
+         34 |         91        1.96       60.78
+         35 |         91        1.96       62.75
+         36 |         91        1.96       64.71
+         37 |         91        1.96       66.67
+         38 |         91        1.96       68.63
+         39 |         91        1.96       70.59
+         40 |         91        1.96       72.55
+         41 |         91        1.96       74.51
+         42 |         91        1.96       76.47
+         44 |         91        1.96       78.43
+         45 |         91        1.96       80.39
+         46 |         91        1.96       82.35
+         47 |         91        1.96       84.31
+         48 |         91        1.96       86.27
+         49 |         91        1.96       88.24
+         50 |         91        1.96       90.20
+         51 |         91        1.96       92.16
+         53 |         91        1.96       94.12
+         54 |         91        1.96       96.08
+         55 |         91        1.96       98.04
+         56 |         91        1.96      100.00
+------------+-----------------------------------
+      Total |      4,641      100.00
+Fixing missing
+
+           | stata_date
+ area_fips | 01oct2017 |     Total
+-----------+-----------+----------
+     02000 |         1 |         1 
+     25000 |         1 |         1 
+-----------+-----------+----------
+     Total |         2 |         2 
+(2 real changes made)
+Finished missing
+(2 real changes made)
+(2 real changes made)
+(2 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        year |      4,641    2011.879    6.568754       2001       2023
+         qtr |      4,641    2.483516    1.113107          1          4
+disclosure~e |          0
+month1_emp~l |      4,641    47614.69    59194.71   .0030522     408260
+month2_emp~l |      4,641     48366.7    60055.66   .0013631     415738
+-------------+---------------------------------------------------------
+month3_emp~l |      4,641    48746.72    60360.46   .0034408     417582
+total_qtrl~s |      4,641    3.58e+08    5.25e+08          0   5.65e+09
+avg_wkly_w~e |      4,641    535.8209    213.3465   .0028599       1450
+   area_fips |      4,641          26    14.72119          1         51
+       qdate |      4,641         209    26.27068        164        254
+-------------+---------------------------------------------------------
+agg~1_emplvl |      4,641     2564633     2889434   .0001847   1.81e+07
+agg~2_emplvl |      4,641     2578628     2906162   .0019381   1.82e+07
+agg~3_emplvl |      4,641     2590334     2917084   .0093219   1.81e+07
+agg_st_tot~s |      4,641    3.23e+10    4.32e+10   .0045318   4.13e+11
+agg_st_avg~e |      4,641    864.6619    285.0442   .0026622       2317
+-------------+---------------------------------------------------------
+not_disclo~d |      4,641    .0004309    .0207569          0          1
+   fake_data |      4,641     .032967    .1785695          0          1
+  stata_date |      4,641     19083.9    2398.815      14976      23192
+    qtr_emps |      4,641    48230.79    59863.82          0     413860
+area_fips_~g |      4,641    28960.78    15678.52       1000      56000
+-------------+---------------------------------------------------------
+       state |      4,641    28.96078    15.67852          1         56
+     treated |      4,641    .0004309    .0207569          0          1
+ln_avg_wkl~e |      4,641    6.021716    1.361654  -5.856981   7.279319
+ln_avg_wkl~o |      4,641   -.4909361    .3121283  -4.890841   5.142392
+file /home/maximm/qcew/inter//temp_only_build_state.dta saved
+(note: j = 1 2 3)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     4641   ->   13923
+Number of variables                  23   ->      20
+j variable (3 values)                     ->   month
+xij variables:
+month_emplvl1 month_emplvl2 month_emplvl3 ->   month_emplvl
+agg_st_month_emplvl1 agg_st_month_emplvl2 agg_st_month_emplvl3->agg_st_month_em
+> plvl
+-----------------------------------------------------------------------------
+(10,404 real changes made)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     13,923
+Absorbing 3 HDFE groups                           F(   0,  13158) =          .
+                                                  Prob > F        =          .
+                                                  R-squared       =     0.9393
+                                                  Adj R-squared   =     0.9358
+                                                  Within R-sq.    =     0.0000
+                                                  Root MSE        = 15172.6638
+
+------------------------------------------------------------------------------
+month_emplvl |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _cons |    48242.7   128.5865   375.18   0.000     47990.65    48494.75
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------------+
+        Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------------+---------------------------------------|
+ state#c.stata_date |        51           0          51    ?|
+     state#c.date_2 |        51           0          51     |
+     state#c.date_3 |        51           0          51    ?|
+              state |        51           0          51    ?|
+        state#month |       612          51         561     |
+------------------------------------------------------------+
+? = number of redundant parameters may be higher
+(13,923 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        year |     13,923    2011.879    6.568282       2001       2023
+     treated |     13,923    .0004309    .0207554          0          1
+   fake_data |     13,923     .032967    .1785567          0          1
+       state |     13,923    28.96078     15.6774          1         56
+disclosure~e |          0
+-------------+---------------------------------------------------------
+         qtr |     13,923    2.483516    1.113027          1          4
+       month |     13,923    6.450549    3.437465          1         12
+month_emplvl |     13,923     48242.7    59869.85   .0013631     417582
+total_qtrl~s |     13,923    3.58e+08    5.25e+08          0   5.65e+09
+avg_wkly_w~e |     13,923    535.8209    213.3311   .0028599       1450
+-------------+---------------------------------------------------------
+   area_fips |     13,923          26    14.72013          1         51
+       qdate |     13,923         209    26.26879        164        254
+agg_st_mon~l |     13,923     2577865     2904059   .0001847   1.82e+07
+agg_st_tot~s |     13,923    3.23e+10    4.32e+10   .0045318   4.13e+11
+agg_st_avg~e |     13,923    864.6619    285.0237   .0026622       2317
+-------------+---------------------------------------------------------
+not_disclo~d |     13,923    .0004309    .0207554          0          1
+    qtr_emps |     13,923    48230.79    59859.52          0     413860
+area_fips_~g |     13,923    28960.78     15677.4       1000      56000
+ln_avg_wkl~e |     13,923    6.021716    1.361556  -5.856981   7.279319
+ln_avg_wkl~o |     13,923   -.4909361    .3121059  -4.890841   5.142392
+-------------+---------------------------------------------------------
+  stata_date |     13,923    19114.42     2398.78      14976      23254
+      date_2 |     13,923    3.71e+08    9.18e+07   2.24e+08   5.41e+08
+      date_3 |     13,923    7.31e+12    2.67e+12   3.36e+12   1.26e+13
+_reghdfe_r~d |     13,923   -6.27e-09    14750.47  -233053.9   128320.3
+month_empl~j |     13,923     48242.7    58869.15   128.4928   443629.9
+-------------+---------------------------------------------------------
+state_mean~l |     13,923     48242.7    56991.24    949.252   315309.5
+ln_month_e~l |     13,923    9.749294    2.384553  -6.597997   12.94224
+ln_month_e~o |     13,923   -4.065288    .9353016  -6.558844    6.53764
+file /home/maximm/qcew/inter//temp_only_build_state_monthly.dta saved
+
+. 
+end of do-file

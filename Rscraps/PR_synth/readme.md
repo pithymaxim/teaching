@@ -8,6 +8,8 @@ The build is done in Stata using two dofiles:
 - `A1_import.do`
 - `A2_extract.do`
 
+The second dofile makes a monthly and quarterly state-level panel giving employment and wages in the temporary help services industry.
+
 ## R code ## 
 
 The rest happens in R. All the R code is called from `master.R` in order. 

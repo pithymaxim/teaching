@@ -2,6 +2,11 @@
 
 This is a guide to the code used for Helping out the outsourced by Massenkoff and Rothstein. 
 
+
+## Downloading the QCEW data ## 
+
+To start, you need to download the QCEW data, which was too big to share. This shell script downloads all the files: `download_qcew.sh`. 
+
 ## Stata build ## 
 The build is done in Stata using two dofiles:
 

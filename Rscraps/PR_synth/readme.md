@@ -1,4 +1,4 @@
-# Readme for pre-registration of ``Helping out the outsourced'' #
+# Readme for pre-registration of "Helping out the outsourced" #
 
 This is a guide to the code used for Helping out the outsourced by Massenkoff and Rothstein. 
 

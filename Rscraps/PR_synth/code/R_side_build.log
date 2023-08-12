@@ -1,0 +1,419 @@
+
+> deflate_wages <- function(df, outcome) {
++   # === Merge in CPI 
++   getSymbols("CPIAUCSL", src = "FRED")
++   CPI_data <- data.frame(date=index(CPIAUCSL), CPIAUCSL=coredata(CPIAUCSL))
++   colnames(CPI_data) <- c("r_date", "CPI")
++   
++   cpi_reference <- CPI_data[CPI_data$r_date == "2023-01-01", "CPI"]
++   CPI_data$deflator <- CPI_data$CPI / cpi_reference
++   
++   df <- left_join(df, CPI_data, by = "r_date")
++   
++   # Need to give nonsense data to the "fake data" periods (2023)
++   df[is.na(df$deflator), "deflator"] <- 1
++   
++   # Deflate average weekly wage 
++   df[[outcome]] <- df[[outcome]] / df$deflator
++   
++   return(df)
++ }
+
+> seasonal_adj <- function(df, outcome, freq, datevar) {
++   # Sort 
++   df <- df %>% arrange(state, r_date)
++   seas_results <- data.frame()
++   
++   # Get the unique state values
++   unique_states <- unique(df$state)
++   
++   # Initialize dataframe 
++   seas_results = data.frame()
++   
++   # Loop over the unique states
++   for(state in unique_states){
++     print(paste0("Starting state ", state))
++     # Subset the data for the current state 
++     df_state = df[df$state==state & df$fake_data==0,]
++ 
++     # Make a time series object
++     ts_state <- ts(df_state[[outcome]], frequency = freq, 
++                    start = c(min(df_state$year), min(df_state[[datevar]])))
++     
++     # Perform the seasonal adjustment
++     seas_state <- seas(ts_state)
++     
++     # Add seasonally adjusted data to the dataframe
++     result = final(seas_state)
++     
++     # New column name 
++     seas_adj_col = paste0(outcome,"_sa")
++     
++     result_df = data.frame(state = rep(state,length(result)), 
++                            year = df_state$year)
++     result_df[[seas_adj_col]] = as.vector(result)
++     result_df[[datevar]] = df_state[[datevar]]
++     
++     seas_results = bind_rows(seas_results,result_df)
++   }
++   
++   # all.x=TRUE to keep the fake_date, which will not match with seas_results
++   df = merge(df, seas_results, by = c("state", "year", datevar), all.x=TRUE)
++   
++   # Fill in the fake data columns with random values
++   if (sum(df$fake_data)>0) {
++     df[[seas_adj_col]][df$fake_data == 1] = runif(sum(df$fake_data))
++   }
++   print(max(df$year))
++   return(df)
++ }
+
+> # =============== Make r date, seasonally adjust, make log vars
+> # === Quarterly data
+> df = read_dta("inter/temp_only_build_state.dta")
+
+> df$r_date <- as.Date(df$stata_date, origin = "1960-01-01")
+
+> # Deflate wages 
+> df = deflate_wages(df,"avg_wkly_wage")
+
+> # Seasonally adjust
+> df = seasonal_adj(df,"avg_wkly_wage",        4, "qtr")
+[1] "Starting state 1"
+[1] "Starting state 2"
+[1] "Starting state 4"
+[1] "Starting state 5"
+[1] "Starting state 6"
+[1] "Starting state 8"
+[1] "Starting state 9"
+[1] "Starting state 10"
+[1] "Starting state 11"
+[1] "Starting state 12"
+[1] "Starting state 13"
+[1] "Starting state 15"
+[1] "Starting state 16"
+[1] "Starting state 17"
+[1] "Starting state 18"
+[1] "Starting state 19"
+[1] "Starting state 20"
+[1] "Starting state 21"
+[1] "Starting state 22"
+[1] "Starting state 23"
+[1] "Starting state 24"
+[1] "Starting state 25"
+[1] "Starting state 26"
+[1] "Starting state 27"
+[1] "Starting state 28"
+[1] "Starting state 29"
+[1] "Starting state 30"
+[1] "Starting state 31"
+[1] "Starting state 32"
+[1] "Starting state 33"
+[1] "Starting state 34"
+[1] "Starting state 35"
+[1] "Starting state 36"
+[1] "Starting state 37"
+[1] "Starting state 38"
+[1] "Starting state 39"
+[1] "Starting state 40"
+[1] "Starting state 41"
+[1] "Starting state 42"
+[1] "Starting state 44"
+[1] "Starting state 45"
+[1] "Starting state 46"
+[1] "Starting state 47"
+[1] "Starting state 48"
+[1] "Starting state 49"
+[1] "Starting state 50"
+[1] "Starting state 51"
+[1] "Starting state 53"
+[1] "Starting state 54"
+[1] "Starting state 55"
+[1] "Starting state 56"
+[1] 2023
+
+> df = seasonal_adj(df,"agg_st_avg_wkly_wage", 4, "qtr")
+[1] "Starting state 1"
+[1] "Starting state 2"
+[1] "Starting state 4"
+[1] "Starting state 5"
+[1] "Starting state 6"
+[1] "Starting state 8"
+[1] "Starting state 9"
+[1] "Starting state 10"
+[1] "Starting state 11"
+[1] "Starting state 12"
+[1] "Starting state 13"
+[1] "Starting state 15"
+[1] "Starting state 16"
+[1] "Starting state 17"
+[1] "Starting state 18"
+[1] "Starting state 19"
+[1] "Starting state 20"
+[1] "Starting state 21"
+[1] "Starting state 22"
+[1] "Starting state 23"
+[1] "Starting state 24"
+[1] "Starting state 25"
+[1] "Starting state 26"
+[1] "Starting state 27"
+[1] "Starting state 28"
+[1] "Starting state 29"
+[1] "Starting state 30"
+[1] "Starting state 31"
+[1] "Starting state 32"
+[1] "Starting state 33"
+[1] "Starting state 34"
+[1] "Starting state 35"
+[1] "Starting state 36"
+[1] "Starting state 37"
+[1] "Starting state 38"
+[1] "Starting state 39"
+[1] "Starting state 40"
+[1] "Starting state 41"
+[1] "Starting state 42"
+[1] "Starting state 44"
+[1] "Starting state 45"
+[1] "Starting state 46"
+[1] "Starting state 47"
+[1] "Starting state 48"
+[1] "Starting state 49"
+[1] "Starting state 50"
+[1] "Starting state 51"
+[1] "Starting state 53"
+[1] "Starting state 54"
+[1] "Starting state 55"
+[1] "Starting state 56"
+[1] 2023
+
+> # Take logs and ratios 
+> df$ln_avg_wkly_wage_sa =    log(df$avg_wkly_wage_sa)
+
+> df$ln_avg_wkly_wage_ratio = log(df$avg_wkly_wage_sa) - log(df$agg_st_avg_wkly_wage_sa)
+
+> # Save the dataframe to a CSV file
+> summary(df)
+     state            year           qtr        disclosure_code    month1_emplvl   
+ Min.   : 1.00   Min.   :2001   Min.   :1.000   Length:4641        Min.   :     0  
+ 1st Qu.:16.00   1st Qu.:2006   1st Qu.:1.000   Class :character   1st Qu.:  8204  
+ Median :29.00   Median :2012   Median :2.000   Mode  :character   Median : 28080  
+ Mean   :28.96   Mean   :2012   Mean   :2.484                      Mean   : 47615  
+ 3rd Qu.:42.00   3rd Qu.:2018   3rd Qu.:3.000                      3rd Qu.: 60764  
+ Max.   :56.00   Max.   :2023   Max.   :4.000                      Max.   :408260  
+ month2_emplvl    month3_emplvl    total_qtrly_wages    avg_wkly_wage         area_fips 
+ Min.   :     0   Min.   :     0   Min.   :         0   Min.   :   0.0028   Min.   : 1  
+ 1st Qu.:  8310   1st Qu.:  8411   1st Qu.:  55878440   1st Qu.: 583.5072   1st Qu.:13  
+ Median : 28495   Median : 28602   Median : 191525079   Median : 691.7391   Median :26  
+ Mean   : 48367   Mean   : 48747   Mean   : 358078423   Mean   : 703.8287   Mean   :26  
+ 3rd Qu.: 61874   3rd Qu.: 62244   3rd Qu.: 451334459   3rd Qu.: 815.3525   3rd Qu.:39  
+ Max.   :415738   Max.   :417582   Max.   :5650470863   Max.   :1614.1834   Max.   :51  
+     qdate     agg_st_month1_emplvl agg_st_month2_emplvl agg_st_month3_emplvl
+ Min.   :164   Min.   :       0     Min.   :       0     Min.   :       0    
+ 1st Qu.:186   1st Qu.:  653580     1st Qu.:  654765     1st Qu.:  657124    
+ Median :209   Median : 1695065     Median : 1709830     Median : 1725073    
+ Mean   :209   Mean   : 2564633     Mean   : 2578628     Mean   : 2590334    
+ 3rd Qu.:232   3rd Qu.: 3136619     3rd Qu.: 3157179     3rd Qu.: 3175730    
+ Max.   :254   Max.   :18147656     Max.   :18153036     Max.   :18078148    
+ agg_st_total_qtrly_wages agg_st_avg_wkly_wage not_disclosed         fake_data      
+ Min.   :           0     Min.   :   0.0027    Min.   :0.0000000   Min.   :0.00000  
+ 1st Qu.:  7069376000     1st Qu.: 714.0000    1st Qu.:0.0000000   1st Qu.:0.00000  
+ Median : 18523179008     Median : 844.0000    Median :0.0000000   Median :0.00000  
+ Mean   : 32316876874     Mean   : 864.6619    Mean   :0.0004309   Mean   :0.03297  
+ 3rd Qu.: 40461099008     3rd Qu.:1007.0000    3rd Qu.:0.0000000   3rd Qu.:0.00000  
+ Max.   :413360226304     Max.   :2317.0000    Max.   :1.0000000   Max.   :1.00000  
+   stata_date            qtr_emps      area_fips_orig     treated          ln_avg_wkly_wage
+ Min.   :2001-01-01   Min.   :     0   Min.   : 1000   Min.   :0.0000000   Min.   :-5.857  
+ 1st Qu.:2006-07-01   1st Qu.:  8300   1st Qu.:16000   1st Qu.:0.0000000   1st Qu.: 6.004  
+ Median :2012-04-01   Median : 28291   Median :29000   Median :0.0000000   Median : 6.236  
+ Mean   :2012-03-31   Mean   : 48231   Mean   :28961   Mean   :0.0004309   Mean   : 6.022  
+ 3rd Qu.:2018-01-01   3rd Qu.: 61740   3rd Qu.:42000   3rd Qu.:0.0000000   3rd Qu.: 6.457  
+ Max.   :2023-07-01   Max.   :413860   Max.   :56000   Max.   :1.0000000   Max.   : 7.279  
+ ln_avg_wkly_wage_ratio     r_date                CPI           deflator      avg_wkly_wage_sa   
+ Min.   :-3.1213        Min.   :2001-01-01   Min.   :175.6   Min.   :0.5843   Min.   :   0.0351  
+ 1st Qu.:-0.3098        1st Qu.:2006-07-01   1st Qu.:201.9   1st Qu.:0.6718   1st Qu.: 582.6936  
+ Median :-0.2087        Median :2012-04-01   Median :228.6   Median :0.7606   Median : 692.3027  
+ Mean   :-0.1872        Mean   :2012-03-31   Mean   :227.4   Mean   :0.7567   Mean   : 703.6807  
+ 3rd Qu.:-0.1061        3rd Qu.:2018-01-01   3rd Qu.:248.9   3rd Qu.:0.8281   3rd Qu.: 814.5914  
+ Max.   : 4.8490        Max.   :2023-07-01   Max.   :304.3   Max.   :1.0127   Max.   :1602.6700  
+ agg_st_avg_wkly_wage_sa ln_avg_wkly_wage_sa
+ Min.   :   0.0019       Min.   :-3.350     
+ 1st Qu.: 717.1738       1st Qu.: 6.368     
+ Median : 845.7651       Median : 6.540     
+ Mean   : 864.4684       Mean   : 6.318     
+ 3rd Qu.:1008.6444       3rd Qu.: 6.703     
+ Max.   :2218.3465       Max.   : 7.379     
+
+> saveRDS(df, "inter/temp_only_build_state_sa.rds")
+
+> # === Monthly data
+> df = read_dta("inter/temp_only_build_state_monthly.dta")
+
+> df$r_date <- as.Date(df$stata_date, origin = "1960-01-01")
+
+> # Seasonally adjust
+> df = seasonal_adj(df,"month_emplvl",        12, "month")
+[1] "Starting state 1"
+[1] "Starting state 2"
+[1] "Starting state 4"
+[1] "Starting state 5"
+[1] "Starting state 6"
+[1] "Starting state 8"
+[1] "Starting state 9"
+[1] "Starting state 10"
+[1] "Starting state 11"
+[1] "Starting state 12"
+[1] "Starting state 13"
+[1] "Starting state 15"
+[1] "Starting state 16"
+[1] "Starting state 17"
+[1] "Starting state 18"
+[1] "Starting state 19"
+[1] "Starting state 20"
+[1] "Starting state 21"
+[1] "Starting state 22"
+[1] "Starting state 23"
+[1] "Starting state 24"
+[1] "Starting state 25"
+[1] "Starting state 26"
+[1] "Starting state 27"
+[1] "Starting state 28"
+[1] "Starting state 29"
+[1] "Starting state 30"
+[1] "Starting state 31"
+[1] "Starting state 32"
+[1] "Starting state 33"
+[1] "Starting state 34"
+[1] "Starting state 35"
+[1] "Starting state 36"
+[1] "Starting state 37"
+[1] "Starting state 38"
+[1] "Starting state 39"
+[1] "Starting state 40"
+[1] "Starting state 41"
+[1] "Starting state 42"
+[1] "Starting state 44"
+[1] "Starting state 45"
+[1] "Starting state 46"
+[1] "Starting state 47"
+[1] "Starting state 48"
+[1] "Starting state 49"
+[1] "Starting state 50"
+[1] "Starting state 51"
+[1] "Starting state 53"
+[1] "Starting state 54"
+[1] "Starting state 55"
+[1] "Starting state 56"
+[1] 2023
+
+> df = seasonal_adj(df,"agg_st_month_emplvl", 12, "month")
+[1] "Starting state 1"
+[1] "Starting state 2"
+[1] "Starting state 4"
+[1] "Starting state 5"
+[1] "Starting state 6"
+[1] "Starting state 8"
+[1] "Starting state 9"
+[1] "Starting state 10"
+[1] "Starting state 11"
+[1] "Starting state 12"
+[1] "Starting state 13"
+[1] "Starting state 15"
+[1] "Starting state 16"
+[1] "Starting state 17"
+[1] "Starting state 18"
+[1] "Starting state 19"
+[1] "Starting state 20"
+[1] "Starting state 21"
+[1] "Starting state 22"
+[1] "Starting state 23"
+[1] "Starting state 24"
+[1] "Starting state 25"
+[1] "Starting state 26"
+[1] "Starting state 27"
+[1] "Starting state 28"
+[1] "Starting state 29"
+[1] "Starting state 30"
+[1] "Starting state 31"
+[1] "Starting state 32"
+[1] "Starting state 33"
+[1] "Starting state 34"
+[1] "Starting state 35"
+[1] "Starting state 36"
+[1] "Starting state 37"
+[1] "Starting state 38"
+[1] "Starting state 39"
+[1] "Starting state 40"
+[1] "Starting state 41"
+[1] "Starting state 42"
+[1] "Starting state 44"
+[1] "Starting state 45"
+[1] "Starting state 46"
+[1] "Starting state 47"
+[1] "Starting state 48"
+[1] "Starting state 49"
+[1] "Starting state 50"
+[1] "Starting state 51"
+[1] "Starting state 53"
+[1] "Starting state 54"
+[1] "Starting state 55"
+[1] "Starting state 56"
+[1] 2023
+
+> # Take logs and ratios 
+> df$ln_month_emplvl_sa =    log(df$month_emplvl_sa)
+
+> df$ln_month_emplvl_ratio = log(df$month_emplvl_sa) - log(df$agg_st_month_emplvl_sa)
+
+> # Save the dataframe to a CSV file
+> summary(df)
+     state            year          month           treated            fake_data      
+ Min.   : 1.00   Min.   :2001   Min.   : 1.000   Min.   :0.0000000   Min.   :0.00000  
+ 1st Qu.:16.00   1st Qu.:2006   1st Qu.: 3.000   1st Qu.:0.0000000   1st Qu.:0.00000  
+ Median :29.00   Median :2012   Median : 6.000   Median :0.0000000   Median :0.00000  
+ Mean   :28.96   Mean   :2012   Mean   : 6.451   Mean   :0.0004309   Mean   :0.03297  
+ 3rd Qu.:42.00   3rd Qu.:2018   3rd Qu.: 9.000   3rd Qu.:0.0000000   3rd Qu.:0.00000  
+ Max.   :56.00   Max.   :2023   Max.   :12.000   Max.   :1.0000000   Max.   :1.00000  
+ disclosure_code         qtr         month_emplvl    total_qtrly_wages    avg_wkly_wage      
+ Length:13923       Min.   :1.000   Min.   :     0   Min.   :         0   Min.   :   0.0029  
+ Class :character   1st Qu.:1.000   1st Qu.:  8296   1st Qu.:  55878440   1st Qu.: 405.0000  
+ Mode  :character   Median :2.000   Median : 28372   Median : 191525079   Median : 511.0000  
+                    Mean   :2.484   Mean   : 48243   Mean   : 358078423   Mean   : 535.8209  
+                    3rd Qu.:3.000   3rd Qu.: 61658   3rd Qu.: 451334459   3rd Qu.: 637.0000  
+                    Max.   :4.000   Max.   :417582   Max.   :5650470863   Max.   :1450.0000  
+   area_fips      qdate     agg_st_month_emplvl agg_st_total_qtrly_wages agg_st_avg_wkly_wage
+ Min.   : 1   Min.   :164   Min.   :       0    Min.   :           0     Min.   :   0.0027   
+ 1st Qu.:13   1st Qu.:186   1st Qu.:  655286    1st Qu.:  7069376000     1st Qu.: 714.0000   
+ Median :26   Median :209   Median : 1711790    Median : 18523179008     Median : 844.0000   
+ Mean   :26   Mean   :209   Mean   : 2577865    Mean   : 32316876874     Mean   : 864.6619   
+ 3rd Qu.:39   3rd Qu.:232   3rd Qu.: 3157336    3rd Qu.: 40461099008     3rd Qu.:1007.0000   
+ Max.   :51   Max.   :254   Max.   :18153036    Max.   :413360226304     Max.   :2317.0000   
+ not_disclosed          qtr_emps      area_fips_orig  ln_avg_wkly_wage ln_avg_wkly_wage_ratio
+ Min.   :0.0000000   Min.   :     0   Min.   : 1000   Min.   :-5.857   Min.   :-4.8908       
+ 1st Qu.:0.0000000   1st Qu.:  8300   1st Qu.:16000   1st Qu.: 6.004   1st Qu.:-0.6080       
+ Median :0.0000000   Median : 28291   Median :29000   Median : 6.236   Median :-0.5076       
+ Mean   :0.0004309   Mean   : 48231   Mean   :28961   Mean   : 6.022   Mean   :-0.4909       
+ 3rd Qu.:0.0000000   3rd Qu.: 61740   3rd Qu.:42000   3rd Qu.: 6.457   3rd Qu.:-0.3966       
+ Max.   :1.0000000   Max.   :413860   Max.   :56000   Max.   : 7.279   Max.   : 5.1424       
+   stata_date        date_2              date_3               _reghdfe_resid      
+ Min.   :14976   Min.   :224280576   Min.   : 3358825906180   Min.   :-233053.85  
+ 1st Qu.:17045   1st Qu.:290532032   1st Qu.: 4952118263810   1st Qu.:  -2097.92  
+ Median :19114   Median :365344992   Median : 6983204208640   Median :    -48.71  
+ Mean   :19114   Mean   :371114691   Mean   : 7313599391530   Mean   :      0.00  
+ 3rd Qu.:21185   3rd Qu.:448804224   3rd Qu.: 9507917791230   3rd Qu.:   2279.24  
+ Max.   :23254   Max.   :540748544   Max.   :12574566383600   Max.   : 128320.33  
+ month_emplvl_adj   state_mean_month_emplvl ln_month_emplvl  ln_month_emplvl_ratio
+ Min.   :   128.5   Min.   :   949.2        Min.   :-6.598   Min.   :-6.613       
+ 1st Qu.:  8590.7   1st Qu.:  8266.8        1st Qu.: 9.024   1st Qu.:-4.400       
+ Median : 29380.0   Median : 31708.7        Median :10.253   Median :-4.104       
+ Mean   : 48242.7   Mean   : 48242.7        Mean   : 9.749   Mean   :-4.066       
+ 3rd Qu.: 62897.9   3rd Qu.: 65363.2        3rd Qu.:11.029   3rd Qu.:-3.885       
+ Max.   :443629.9   Max.   :315309.5        Max.   :12.942   Max.   : 6.151       
+     r_date           month_emplvl_sa  agg_st_month_emplvl_sa ln_month_emplvl_sa
+ Min.   :2001-01-01   Min.   :     0   Min.   :       0       Min.   :-6.985    
+ 1st Qu.:2006-09-01   1st Qu.:  8313   1st Qu.:  654099       1st Qu.: 9.026    
+ Median :2012-05-01   Median : 28444   Median : 1715550       Median :10.256    
+ Mean   :2012-05-01   Mean   : 48242   Mean   : 2577847       Mean   : 9.750    
+ 3rd Qu.:2018-01-01   3rd Qu.: 61573   3rd Qu.: 3152210       3rd Qu.:11.028    
+ Max.   :2023-09-01   Max.   :411361   Max.   :17999708       Max.   :12.927    
+
+> saveRDS(df, "inter/temp_only_build_state_monthly_sa.rds")

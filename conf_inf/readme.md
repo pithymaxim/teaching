@@ -7,5 +7,6 @@ Steps:
 - **Calculate the residuals from the new SCM**: We can calculate residuals:
 $$\hat{u}_t = Y_t - \hat{Y}_t(0)$$
 for all time periods $t$. If there was a big positive effect, the residuals should get super negative in the post-period (assuming we use the second option in confusion A).
+
 - **Calculate the test statistic**: this is the sum of the absolute value of residuals in the post-period. For the post-treatment period this is $S(\hat{u_{\pi_0}})$.
 - **Calculate the p-value**: We can calculate the test statistic $S$ for every possible permutation of test statistics. Next question: does this mean re-estimating SCM for each permutation? The p-value is then the share of permutations that are bigger than $S(\hat{u_{\pi_0}})$

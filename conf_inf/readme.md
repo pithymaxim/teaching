@@ -11,3 +11,11 @@ for all time periods $t$. If there was a big positive effect, the residuals shou
 
 - **Calculate the test statistic**: this is the sum of the absolute value of residuals in the post-period. For the post-treatment period this is $S(\hat{u_{\pi_0}})$.
 - **Calculate the p-value**: We can calculate the test statistic $S$ for every possible permutation of test statistics. Next question: does this mean re-estimating SCM for each permutation? The p-value is then the share of permutations that are bigger than $S(\hat{u_{\pi_0}})$
+
+## Chernozhukov et al explanation ##
+
+![image](https://github.com/pithymaxim/teaching/assets/6835110/ca6b381f-14a7-4ea1-aaa2-5bf2ebde866f)
+
+- $P_t^N$: a mean-unbiased proxy for the counterfactual outcomes of the treated unit in the absense of the policy intervention
+- $Y_{1t}^N$:  the counterfactual outcomes of the treated unit in the absense of the policy intervention
+- $u_t$: the error

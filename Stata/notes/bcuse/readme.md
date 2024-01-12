@@ -1,5 +1,7 @@
 # Install the bcuse package
 
+The `bcuse` package has a lot of useful example datasets. [List of datasets](http://fmwww.bc.edu/ec-p/data/wooldridge/datasets.list.html).
+
 Run this line to install `bcuse`
 ```
 ssc install bcuse

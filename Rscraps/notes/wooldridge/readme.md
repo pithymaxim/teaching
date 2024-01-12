@@ -1,6 +1,6 @@
 # Install the Wooldridge package in R
 
-The Wooldridge package comes with some useful example datasets. [https://www.rdocumentation.org/packages/wooldridge/versions/1.3.1](List of datasets).
+The Wooldridge package comes with some useful example datasets. [List of datasets](https://www.rdocumentation.org/packages/wooldridge/versions/1.3.1).
 
 ```R
 # Install it

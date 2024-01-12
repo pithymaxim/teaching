@@ -1,8 +1,13 @@
 # Install the Wooldridge package in R
 
+The Wooldridge package comes with some useful example datasets.
+
 ```R
+# Install it
 install.packages("wooldridge")
+# Load it
 library(wooldridge)
+# Open a specific data set
 data(mlb1)
 # Now you should be able to see the `mlb1’ data set
 head(mlb1)

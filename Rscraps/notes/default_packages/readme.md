@@ -26,7 +26,7 @@ In Windows, you might be blocked from saving any changes. To get around this, fi
 
 ## A faster way to edit .Rprofile? ## 
 
-[This site](https://rstats.wtf/r-startup.html) shows that you can also edit the `.Rprofile' file with the `usethis` package. If you first install `usethis` with 
+[This site](https://rstats.wtf/r-startup.html) shows that you can also edit the `.Rprofile` file with the `usethis` package. If you first install `usethis` with 
 
 ```R
 install.packages("usethis")

@@ -35,6 +35,8 @@ library(usethis)
 
 Then the command `usethis::edit_r_profile()` will open up the `.Rprofile` file in RStudio. Note that you may need administrator priviledge to save changes so this could throw some issues.
 
+# What to put in the file #
+
 Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. I tell it where dropbox is on my local computer and run my main startup script, startup.r.
 
 ```R

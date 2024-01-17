@@ -37,14 +37,16 @@ Then the command `usethis::edit_r_profile()` will open up the `.Rprofile` file i
 
 # What to put in the file #
 
-Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. I tell it where dropbox is on my local computer and run my main startup script, startup.r.
+Here are the lines I added to my `Rprofile.site` file. Now the packages `wooldridge` and `ggplot2` will be loaded by default. I also put a `print()` message to give the user more info. I tell it where dropbox is on my local computer and run my main startup script, `startup.r`.
 
 ```R
 print("Running Rprofile.site made by Maxim")
 dropbox = "C:\\Users\\MM\\Dropbox"
-source(file.path(dropbox,"berkeley/projects/R/startup.r"))
+source(file.path(dropbox,"startup.r"))
 print("Finished running Rprofile.site made by Maxim")
 ```
+The reason I have a separate startup file is so that I only have to edit the version I have in Dropbox.
+
 To see if it worked, close RStudio and open it again. The `print()` command confirms that my new additions to `Rprofile.site` have run, because I see it in the RStudio console:
 
 <img src="https://user-images.githubusercontent.com/6835110/227623755-3c4d5e08-2112-48f9-8835-df6f438396b7.png" width="700">

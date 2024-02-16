@@ -19,3 +19,7 @@ destring total_population, replace
 drop if real(county)==.
 destring county, replace 
 outsheet using "county_data_extract.csv", comma names replace 
+
+# Dog breeds # 
+
+From https://github.com/tmfilho/akcdata

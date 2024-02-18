@@ -1,0 +1,62 @@
+---
+title: "My Homework 2"
+author: "Dr. Peavalieux"
+date: "2024-01-22"
+output: 
+  html_document:
+    code_folding: show
+    toc: TRUE
+    toc_float: 
+      collapsed: TRUE
+    theme: united
+---
+
+## Preliminaries
+
+```{r, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# prevent R from truncating output 
+options(dplyr.width = Inf)
+
+# set working directory
+# setwd("")
+```
+
+## Week 3
+### Q1
+#### Add two and three
+
+The simple act of adding 2 + 3 in R, a language designed for statistical computing and graphics, embodies the joy of programming and mathematical exploration. This operation, while elementary, opens the door to the vast capabilities of R, allowing users to engage with data analysis, visualization, and statistical modeling in an intuitive manner. The satisfaction derived from executing this basic command serves as an invitation to delve deeper into the language's rich ecosystem, where complex problems can be solved with elegant solutions. Whether a novice taking their first steps in coding or a seasoned analyst conducting sophisticated data analysis, the experience of adding numbers in R encapsulates the delight of discovery and the power of transforming ideas into actionable insights.
+
+```{r}
+2+3
+```
+
+### Q2
+#### Print a greeting
+
+```{r}
+print("hello")
+```
+
+### Q3
+#### Regression
+```{r}
+data(mtcars)
+stargazer(lm(cyl ~ mpg, data = mtcars), type = "text")
+```
+
+
+## Week 4
+### Q7
+#### Make a histogram 
+
+Here is my histogram:
+
+```{r, fig.align = "center"}
+ggplot(data = mtcars, aes(mpg)) + 
+  geom_histogram()
+```
+
+

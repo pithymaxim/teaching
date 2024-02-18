@@ -4,7 +4,7 @@ R doesn't have any innate ways to make a Stata-style log (that is, capturing the
 
 ## 1. R Markdown ##
 
-The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example.Rmd) makes [this html file](https://htmlpreview.github.io/?https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example_output.html). The strengths are that this makes a beautiful HTML or PDF file. The downside is that it requires more syntax to delimit code vs. text.
+The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example.Rmd) makes [this html file](https://htmlpreview.github.io/?https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example_output.html). The strengths are that this makes a beautiful HTML or PDF file. (Windows machines have trouble making the PDF.) For a very slick template for .Rmd code, [`slick_markdown.Rmd`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/slick_markdown.Rmd) makes this [HTML output](https://pithymaxim.github.io/slick_markdown.html) with a beautiful table of contents. The downside is that it requires more syntax to delimit code vs. text.
 
 ### Inline code in Markdown ###
 

@@ -1,3 +1,7 @@
+# LaLonde NSW data
+
+This page contains data from the National Supported Work Demonstration and the PSID. Write-up of the NSW is [here](https://www.mdrc.org/work/publications/summary-and-findings-national-supported-work-demonstration).
+
 # nsw_experiment.dta
 
 A data frame with 445 observations, corresponding to 185 treated and 260 control subjects, and 10 variables. The treatment assignment indicator is the first variable of the data frame: treatment (1 = treated; 0 = control). The next 7 columns are the covariates: 

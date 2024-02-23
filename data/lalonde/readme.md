@@ -14,4 +14,4 @@ of this dataset used indicator variables black and hispan instead of a single ra
 - "re78" is income in 1978, in U.S. dollars.
 - "treat" is the treatment variable, "re78" is the outcome, and the others are pre-treatment covariates
 
-More [here](https://search.r-project.org/CRAN/refmans/designmatch/html/lalonde.html)https://search.r-project.org/CRAN/refmans/designmatch/html/lalonde.html)
+More [here](https://search.r-project.org/CRAN/refmans/designmatch/html/lalonde.html)

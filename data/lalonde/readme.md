@@ -15,3 +15,7 @@ of this dataset used indicator variables black and hispan instead of a single ra
 - "treat" is the treatment variable, "re78" is the outcome, and the others are pre-treatment covariates
 
 More [here](https://search.r-project.org/CRAN/refmans/designmatch/html/lalonde.html)
+
+# psid_with_treated.dta 
+
+This contains 2,675 observations: 2,490 controls from the PSID and 185 participants in the work training program. Same variable definitions as above. Regressing `re78` on `treat` gives the same results as Table 3 Column (1), row "PSID-1" of [Dehejia and Wahba (1999)](https://www.jstor.org/stable/2669919). 

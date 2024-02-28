@@ -1,5 +1,18 @@
 # Making a balance table in R # 
 
+## Simple table using just CreateTableOne ## 
+
+```r
+library(tableone)
+
+# Create the balance table
+tableOne <- CreateTableOne(vars =c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "carb"), 
+                           strata = "vs", 
+                           data = mtcars, factorVars = c("am","gear"))
+# Print the table
+print(tableOne)
+```
+
 ## Using CreateTableOne and kable ##
 
 The code [here](https://github.com/pithymaxim/teaching/blob/main/Rscraps/balance_table/balance_table_kable.r) shows how to make the balance table below. It's written so that you should have to just change the details in the "EDIT THESE" box at the top.

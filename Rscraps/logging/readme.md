@@ -2,7 +2,7 @@
 
 R doesn't have any innate ways to make a Stata-style log (that is, capturing the comments, commands, and output). Here are two ways to do it.
 
-**Warning for RStudio users**: By default it indents the `.Rmd` code when you copy and paste it. The solution is to uncheck this box.
+**Warning for RStudio users**: By default it indents the `.Rmd` code when you copy and paste it. The solution is to uncheck [Auto-indent code after paste](https://raw.githubusercontent.com/pithymaxim/teaching/main/Rscraps/logging/uncheck.png) in Tools > Global Options.
 
 ## 1. R Markdown ##
 

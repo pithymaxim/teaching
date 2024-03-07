@@ -2,6 +2,8 @@
 
 R doesn't have any innate ways to make a Stata-style log (that is, capturing the comments, commands, and output). Here are two ways to do it.
 
+* Warning for RStudio users: * By default it indents the `.Rmd` code when you copy and paste it. The solution is to uncheck this box.
+
 ## 1. R Markdown ##
 
 The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example.Rmd) makes [this html file](https://htmlpreview.github.io/?https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/markdown_example_output.html). The strengths are that this makes a beautiful HTML or PDF file. (Windows machines have trouble making the PDF.) The downside is that it requires more syntax to delimit code vs. text.
@@ -9,6 +11,8 @@ The R markdown code in [`markdown_example.Rmd`](https://github.com/pithymaxim/te
 ### Slick R Markdown ###
 
 For a very slick template for .Rmd code, [`slick_markdown.Rmd`](https://github.com/pithymaxim/teaching/blob/main/Rscraps/logging/slick_markdown.Rmd) makes this [HTML output](https://pithymaxim.github.io/slick_markdown.html) with a beautiful table of contents. 
+
+
 
 ### Inline code in Markdown ###
 

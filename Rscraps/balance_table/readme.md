@@ -11,9 +11,12 @@ tableOne <- CreateTableOne(vars =c("mpg", "cyl", "disp", "hp", "drat", "wt", "qs
                            data = mtcars, factorVars = c("carb","cyl"))
 
 # Print the table
-
 print(tableOne)
 ```
+This is the table it makes in R output:
+
+![image](https://github.com/pithymaxim/teaching/assets/6835110/c0d1cc4d-8f56-46ac-b026-17517ad70ae8)
+
 
 ## Using CreateTableOne and kable ##
 

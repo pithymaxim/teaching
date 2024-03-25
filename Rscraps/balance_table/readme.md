@@ -4,13 +4,14 @@
 
 ```r
 library(tableone)
-
+data(mtcars)
 # Create the balance table
 tableOne <- CreateTableOne(vars =c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "carb"), 
                            strata = "vs", 
-                           data = mtcars, factorVars = c("carb","cyl))
+                           data = mtcars, factorVars = c("carb","cyl"))
 
 # Print the table
+
 print(tableOne)
 ```
 

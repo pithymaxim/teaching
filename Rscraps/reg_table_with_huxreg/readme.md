@@ -1,4 +1,4 @@
-This is a fully working example of a regression table with `huxreg` and `flextable`:
+This is a fully working example of a regression table with `huxreg` and `flextable`. An option using `stargazer` is [here](https://github.com/pithymaxim/teaching/blob/main/Rscraps/regression_table.r).
 
 ```r
 library(flextable)

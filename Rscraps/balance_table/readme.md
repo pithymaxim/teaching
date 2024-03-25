@@ -12,6 +12,8 @@ tableOne <- CreateTableOne(vars =c("mpg", "cyl", "disp", "hp", "drat", "wt", "qs
 
 # Print the table
 print(tableOne)
+# Output it to a CSV:
+write.csv(print(tableOne), file = "tableOne.csv")
 ```
 This is the table it makes in R output:
 

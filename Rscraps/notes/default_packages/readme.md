@@ -24,7 +24,7 @@ Now you need to find the `Rprofile.site` file and edit it. The top of my `Rprofi
 
 In Windows, you might be blocked from saving any changes. To get around this, first right-click Notepad (or any other text-editing app) and click "Run as administrator" and then open `Rprofile.site`. Now you should be allowed to make changes.
 
-## A faster way to edit .Rprofile? ## 
+## A faster way to edit .Rprofile ## 
 
 [This site](https://rstats.wtf/r-startup.html) shows that you can also edit the `.Rprofile` file with the `usethis` package. If you first install `usethis` with 
 

@@ -15,10 +15,9 @@ print(tableOne)
 # Output it to a CSV:
 write.csv(print(tableOne), file = "tableOne.csv")
 ```
-This is the table it makes in R output:
+Here's the CSV output:
 
-![image](https://github.com/pithymaxim/teaching/assets/6835110/c0d1cc4d-8f56-46ac-b026-17517ad70ae8)
-
+![image](https://github.com/pithymaxim/teaching/assets/6835110/cffc09cd-a94f-40a6-a1d3-ac68553cd50c)
 
 ## Using CreateTableOne and kable ##
 

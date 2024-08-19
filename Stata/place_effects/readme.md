@@ -141,11 +141,12 @@ switcher_or |
 ```
 Out of 990 unique people, 285 switched industries.
 
-Next, we can estimate similar regressions with and without controls.
+Next, we can estimate similar regressions with and without controls. I make the reference industry durable manufacturing since that's the biggest one in this data. Note that time controls should always be included.
 ```
-eststo m1: regress earnings ib5.industry, robust
-eststo m2: regress earnings ib5.industry, robust absorb(id)
-eststo m3: regress earnings ib5.industry hours age uniond, robust absorb(id)
+eststo m1: regress earnings ib5.industry i.year i.month, cluster(id)
+eststo m2: regress earnings ib5.industry i.year i.month hours age uniond, cluster(id) absorb(id)
 ```
-![image](https://github.com/user-attachments/assets/4e9fad49-8e8e-4670-8468-8758c16ce450)
+Ultimately, the large confidence intervals on the point estimates below suggest that we are underpowered to detect reasonable industry effects. 285 switchers is too small of a sample for the kind of analysis that we're doing. It still captures some interesting things though. For example, people working in personal services (house cleaners, barbers, etc.) are doing way worse than all other industries when you look at the raw averages (top blue dot). However, once you account for hours, age, union membership and---most importantly---person fixed effects, personal services look a lot less bad (top red dot). This suggests that most of the gap in raw earnings was due to the fact that people working in personal services also tend to end less in other industries.
+
+![image](https://github.com/user-attachments/assets/5a51d9ea-6ef3-47ef-a370-2cff85479013)
 

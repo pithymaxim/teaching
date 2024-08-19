@@ -115,7 +115,7 @@ A more realistic question is: What is the effect on wages that you get merely by
 
 ## How many switchers?
 
-We're going to want to include person fixed effects, and for this we need at list some people to switch industries. 
+We're going to want to include person fixed effects, and for this we need at least some people to switch industries. 
 
 How many switchers do we have? Since there's a numeric code for industry, we can count this by identifying people whose maximum value of industry is different from their minimum value of industry. This could only happen if they changed industries at some point (everyone in the sample is always employed).
 ```

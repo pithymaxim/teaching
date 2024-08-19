@@ -111,7 +111,7 @@ twoway (hist company_FE         , color(red%20) width(500))  ///
 
 # Place effects in a more realistic context
 
-A more realistic question is: What is the effect on wages that you get merely by working in a different industry? For example, imagine a mall janitor that gets hired to do the same work at a large technology firm. Will they be paid more after this switch? `sipp_industry_effects.dta` allows you to analyze such a question. It contains data on workers in the SIPP. This is panel data, with one row representing a person's responses for that particular month. Some people switch industries during the sample period.
+A more realistic question is: What is the effect on wages that you get merely by working in a different industry? For example, imagine a mall janitor that gets hired to do the same work at a large technology firm. Will they be paid more after this switch? [`sipp_industry_effects.dta`](https://github.com/pithymaxim/teaching/blob/main/data/sipp_industry_effects.dta) allows you to analyze such a question. It contains data on workers in the SIPP. This is panel data, with one row representing a person's responses for that particular month. Some people switch industries during the sample period.
 
 ## How many switchers?
 

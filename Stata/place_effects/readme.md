@@ -109,5 +109,43 @@ twoway (hist company_FE         , color(red%20) width(500))  ///
 ```
 ![image](https://github.com/pithymaxim/teaching/assets/6835110/64e2b80b-ae2f-40e7-a8de-b08d5c48e057)
 
+# Place effects in a more realistic context
 
+A more realistic question is: What is the effect on wages that you get merely by working in a different industry? For example, imagine a mall janitor that gets hired to do the same work at a large technology firm. Will they be paid more after this switch? `sipp_industry_effects.dta` allows you to analyze such a question. It contains data on workers in the SIPP. This is panel data, with one row representing a person's responses for that particular month. Some people switch industries during the sample period.
+
+## How many switchers?
+
+We're going to want to include person fixed effects, and for this we need at list some people to switch industries. 
+
+How many switchers do we have? Since there's a numeric code for industry, we can count this by identifying people whose maximum value of industry is different from their minimum value of industry. This could only happen if they changed industries at some point (everyone in the sample is always employed).
+```
+bys id: egen max_ind = max(industry)
+bys id: egen min_ind = min(industry)
+gen my_switcher_measure = max_ind!=min_ind
+```
+Anyone with `max_ind` not equal to `min_ind` is someone who changed industries at some point. To count them, we first make a variable equal to one for that person's first observation (otherwise we would county every row they appear in the data)
+```
+bys id: gen first_obs = _n==1
+```
+Now we can properly count them:
+```
+. tab switcher if first_obs==1
+
+switcher_or |
+         ig |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        705       71.21       71.21
+          1 |        285       28.79      100.00
+------------+-----------------------------------
+      Total |        990      100.00
+```
+Out of 990 unique people, 285 switched industries.
+
+Next, we can estimate similar regressions with and without controls.
+```
+eststo m1: regress earnings ib5.industry, robust
+eststo m2: regress earnings ib5.industry, robust absorb(id)
+eststo m3: regress earnings ib5.industry hours age uniond, robust absorb(id)
+```
+![image](https://github.com/user-attachments/assets/4e9fad49-8e8e-4670-8468-8758c16ce450)
 

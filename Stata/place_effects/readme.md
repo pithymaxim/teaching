@@ -141,6 +141,8 @@ switcher_or |
 ```
 Out of 990 unique people, 285 switched industries.
 
+## Estimating industry effects
+
 Next, we can estimate similar regressions with and without controls. I make the reference industry durable manufacturing since that's the biggest one in this data. Note that time controls should always be included.
 ```
 eststo m1: regress earnings ib5.industry i.year i.month, cluster(id)

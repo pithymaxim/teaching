@@ -119,6 +119,7 @@ We're going to want to include person fixed effects, and for this we need at lea
 
 How many switchers do we have? Since there's a numeric code for industry, we can count this by identifying people whose maximum value of industry is different from their minimum value of industry. This could only happen if they changed industries at some point (everyone in the sample is always employed).
 ```
+drop if missing(industry)
 bys id: egen max_ind = max(industry)
 bys id: egen min_ind = min(industry)
 gen my_switcher_measure = max_ind!=min_ind

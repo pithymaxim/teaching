@@ -130,17 +130,17 @@ bys id: gen first_obs = _n==1
 ```
 Now we can properly count them:
 ```
-. tab switcher if first_obs==1
+. tab my_switcher_measure if first_obs==1
 
-switcher_or |
-         ig |      Freq.     Percent        Cum.
+my_switcher |
+   _measure |      Freq.     Percent        Cum.
 ------------+-----------------------------------
-          0 |        705       71.21       71.21
-          1 |        285       28.79      100.00
+          0 |        751       76.09       76.09
+          1 |        236       23.91      100.00
 ------------+-----------------------------------
-      Total |        990      100.00
+      Total |        987      100.00
 ```
-Out of 990 unique people, 285 switched industries.
+Out of 987 unique people, 236 switched industries.
 
 ## Estimating industry effects
 

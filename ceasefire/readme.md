@@ -17,3 +17,5 @@ To run this, put `04179-0002-Data.txt` into your `raw/` folder. Next
 - Run `augsynth_ceasefire.r` to see how the results look using the [augmented synthetic control method](https://arxiv.org/abs/1811.04170).
 
 ## Results 
+
+The augsynth (using the quarterly build) finds an Average Post-Treatment Effect of -3.2 (95% CI: -13.0 to 6.9) murders, or a 33% decrease relative to the pre-treatment mean of 9.8 murders per quarter. This is smaller than the 63% reported in the section using only the Boston time series, but is similar to more conservative estimates reviewed in [Braga et al (2019)](https://scholar.harvard.edu/files/cwinship/files/pulling_levers_skeptic_-_second_edition_update.pdf).

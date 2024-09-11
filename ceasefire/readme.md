@@ -5,7 +5,7 @@ This provides the code and data for reproducing (in spirit) the main findings fr
 
 # Running the code
 
-This main finding is reproducible with the ``Uniform Crime Reports: Supplementary Homicide Reports, 1976-2002'' available from ICPSR (download `DS2 Victim Data` at this [link](https://www.icpsr.umich.edu/web/NACJD/studies/4179/versions/V1)).
+This main finding is reproducible with the "Uniform Crime Reports: Supplementary Homicide Reports, 1976-2002" available from ICPSR (download `DS2 Victim Data` at this [link](https://www.icpsr.umich.edu/web/NACJD/studies/4179/versions/V1)).
 
 To run this, put `04179-0002-Data.txt` into your `raw/` folder. Next
 

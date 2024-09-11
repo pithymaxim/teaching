@@ -4,3 +4,9 @@ This provides the code and data for reproducing (in spirit) the main findings fr
 ![image](https://github.com/user-attachments/assets/422e4059-8003-433f-97d8-fc56b3014886)
 
 This main finding is reproducible with the [Uniform Crime Reports: Supplementary Homicide Reports, 1976-2002](https://www.icpsr.umich.edu/web/NACJD/studies/4179/versions/V1) available from ICPSR.
+
+To run this, put `04179-0002-Data.txt` into your `raw/` folder. Next
+
+- Run `import.do` to load the UCR data into Stata
+- Run `build.do` to make the analysis file
+  - *Note*: this treats all missing months as zero, although that's certainly wrong in some cases! 

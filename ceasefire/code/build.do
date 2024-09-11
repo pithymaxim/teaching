@@ -63,10 +63,12 @@ collapse (firstnm) `yearvar' date (sum) murders (max) treated, by(city_num $date
 
 bys city_num: gegen ever_treated = max(treated)
 
+
+display "pre-treated mean: "
 sum murders if ever_treated==1 & treated==0
 
 * Ceasefire stopped around 2001
-keep if year < 2002
+keep if year < 2002 & year >= 1985
 
 label data "Made in build.do on ${S_DATE} by `c(username)'"
 save inter/ceasefire_balanced_${datevar}.dta, replace

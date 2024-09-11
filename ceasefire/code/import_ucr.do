@@ -30,7 +30,7 @@ infix str stcode 1-2 ///
       float wtst 94-101 ///
       byte wtimpus 102 ///
       byte wtimpst 103 ///
-      using "raw\ICPSR_04179\DS0002\04179-0002-Data.txt", clear
+      using "raw\04179-0002-Data.txt", clear
 
 label data "Made in import_ucr on ${S_DATE} by `c(username)'"
 save inter/ucr_import.dta, replace

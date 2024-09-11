@@ -22,4 +22,4 @@ The augsynth (using the quarterly build) finds an Average Post-Treatment Effect 
 
 The augsynth script also makes this plot, showing the Boston vs. synthetic Boston. The purple line marks the start of Operation Ceasefire.
 
-![image](https://github.com/user-attachments/assets/18e8e12c-26f7-4406-88a1-1ba06cdadcbc)
+![image](https://github.com/user-attachments/assets/52002d80-02ba-4e34-89ec-c2e4340367dc)

@@ -7,8 +7,9 @@ This provides the code and data for reproducing (in spirit) the main findings fr
 
 This main finding is reproducible with the "Uniform Crime Reports: Supplementary Homicide Reports, 1976-2002" available from ICPSR (download `DS2 Victim Data` at this [link](https://www.icpsr.umich.edu/web/NACJD/studies/4179/versions/V1)).
 
-To run this, put `04179-0002-Data.txt` into your `raw/` folder. Next
+To run this:
 
+- Put `04179-0002-Data.txt` from the ICPSR [link](https://www.icpsr.umich.edu/web/NACJD/studies/4179/versions/V1) into your `raw/` folder
 - Run `import_ucr.do` to load the UCR data into Stata
 - Run `build.do` to make the analysis file
   - This is a quicky and dirty build! City-level data is assembled by identifying agencies in the same state with the city name in the agency name. Also, the build treats all missing months as zero, although that's certainly wrong in some cases.

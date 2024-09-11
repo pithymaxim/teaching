@@ -9,7 +9,7 @@ This main finding is reproducible with the [Uniform Crime Reports: Supplementary
 
 To run this, put `04179-0002-Data.txt` into your `raw/` folder. Next
 
-- Run `import.do` to load the UCR data into Stata
+- Run `import_ucr.do` to load the UCR data into Stata
 - Run `build.do` to make the analysis file
   - This is a quicky and dirty build! City-level data is assembled by identifying agencies in the same state with the city name in the agency name. Also, the build treats all missing months as zero, although that's certainly wrong in some cases.
   - You can alter the globals make a monthly or quarterly build

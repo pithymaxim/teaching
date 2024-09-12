@@ -4,8 +4,6 @@ library(augsynth)
 library(ggplot2)
 library(haven)
 
-setwd(file.path(dropbox, "berkeley/projects/ceasefire"))
-
 # Load data
 df = read_dta("inter/ceasefire_balanced_quarter.dta")
 

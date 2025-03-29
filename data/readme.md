@@ -6,6 +6,29 @@ from https://rdrr.io/cran/wooldridge/man/benefits.html
 
 Is from https://search.r-project.org/CRAN/refmans/datasetsICR/html/NBA.game.html
 
+# caschool.csv #
+
+| Variable | Description |
+|----------|-------------|
+| `distcode` | District code |
+| `county` | Name of county |
+| `district` | Name of district |
+| `grspan` | Grade span of district |
+| `enrltot` | Total enrollment |
+| `teachers` | Number of teachers |
+| `calwpct` | Percent qualifying for CalWorks |
+| `mealpct` | Percent qualifying for reduced-price lunch |
+| `computer` | Number of computers |
+| `testscr` | Average test score (reading + math)/2 |
+| `compstu` | Number of computers per student |
+| `expnstu` | Expenditure per student |
+| `str` | Student-to-teacher ratio |
+| `avginc` | District average income |
+| `elpct` | Percent of English learners |
+| `readscr` | Average reading score |
+| `mathscr` | Average math score |
+
+
 # County level extract #
 
 is from https://www.kaggle.com/code/johnjdavisiv/us-counties-weather-health-hospitals-covid19-data/report after running this code:

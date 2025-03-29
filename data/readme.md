@@ -1,3 +1,11 @@
+# atus_MN4111.dta
+
+Build from an IPUMS ATUS-X pull. Dofiles in `scripts/`. All variables from IPUMS except
+```
+too_little_sleep = sleeping/60 < 6
+any_kids = childcare>0
+```
+
 # benefits 
 
 from https://rdrr.io/cran/wooldridge/man/benefits.html

@@ -18,23 +18,23 @@ Is from https://search.r-project.org/CRAN/refmans/datasetsICR/html/NBA.game.html
 
 | Variable | Description |
 |----------|-------------|
-| `distcode` | District code |
+| `dist_cod` | District code |
 | `county` | Name of county |
 | `district` | Name of district |
-| `grspan` | Grade span of district |
-| `enrltot` | Total enrollment |
+| `gr_span` | Grade span of district |
+| `enrl_tot` | Total enrollment |
 | `teachers` | Number of teachers |
-| `calwpct` | Percent qualifying for CalWorks |
+| `calw_pct` | Percent qualifying for CalWorks |
 | `meal_pct` | Percent qualifying for reduced-price lunch |
 | `computer` | Number of computers |
 | `testscr` | Average test score (reading + math)/2 |
-| `compstu` | Number of computers per student |
-| `expnstu` | Expenditure per student |
+| `comp_stu` | Number of computers per student |
+| `expn_stu` | Expenditure per student |
 | `str` | Student-to-teacher ratio |
 | `avginc` | District average income |
 | `el_pct` | Percent of English learners |
-| `readscr` | Average reading score |
-| `mathscr` | Average math score |
+| `read_scr` | Average reading score |
+| `math_scr` | Average math score |
 
 
 # County level extract #

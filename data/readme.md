@@ -58,3 +58,7 @@ outsheet using "county_data_extract.csv", comma names replace
 # Dog breeds # 
 
 From https://github.com/tmfilho/akcdata
+
+# NHEFS #
+
+This is cleaned data from the National Health and Nutrition Examination Survey Data I Epidemiologic Follow-up Study provided in Hernan and Robins' book [_What if_](https://miguelhernan.org/whatifbook). Codebook available [here](https://github.com/BiomedSciAI/causallib/blob/master/causallib/datasets/data/nhefs/NHEFS_codebook.csv). N = 1,629.

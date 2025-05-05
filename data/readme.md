@@ -70,7 +70,6 @@ This is the replication data from [Do learning communities increase first year c
 | **Treatment Variables** |  |
 | `Assigned_rct` | Treatment assignment variable (randomized) |
 | `FYLC` | Treatment uptake variable (First-Year Learning Community participation) |
-| `Assigned` | Alternative assignment variable (appears in some analyses) |
 | **Outcome Variables** |  |
 | `Retention_After_Year_1` | Student retention after first year (binary) |
 | `GPAyr1` | First-year grade point average |

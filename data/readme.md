@@ -59,6 +59,40 @@ outsheet using "county_data_extract.csv", comma names replace
 
 From https://github.com/tmfilho/akcdata
 
+# FYLCdata.dta
+
+This is the replication data from [Do learning communities increase first year college retention? Evidence from a randomized control trial](https://www.sciencedirect.com/science/article/pii/S0272775722000553#ecom0002) by Azzam et al.
+
+## Variable descriptions
+
+| Variable Name | Description |
+|---------------|-------------|
+| **Treatment Variables** |  |
+| `Assigned_rct` | Treatment assignment variable (randomized) |
+| `FYLC` | Treatment uptake variable (First-Year Learning Community participation) |
+| `Assigned` | Alternative assignment variable (appears in some analyses) |
+| **Outcome Variables** |  |
+| `Retention_After_Year_1` | Student retention after first year (binary) |
+| `GPAyr1` | First-year grade point average |
+| `GPAyr2` | Second-year grade point average |
+| **Covariates** |  |
+| `Cohort` | Student cohort/year |
+| `Gender` | Student gender |
+| `Highschool_GPA` | High school grade point average |
+| `Cen_HSGPA` | Centered high school GPA (standardized) |
+| `SAT_Verbal` | SAT verbal score |
+| `Cen_SAT_Verbal` | Centered SAT verbal score (standardized) |
+| `SAT_Math` | SAT math score |
+| `Cen_SAT_Math` | Centered SAT math score (standardized) |
+| `SAT_Writing` | SAT writing score |
+| `Cen_SAT_writing` | Centered SAT writing score (standardized) |
+| `Low_Income` | Low income status indicator |
+| `FIRSTGEN` | First generation college student indicator |
+| `ON_CAMPUS` | On-campus housing indicator |
+| **Other Variables** |  |
+| `RCT` | Indicates participation in the randomized controlled trial |
+| `non_experimental` | Indicates non-experimental sample |
+
 # NHEFS #
 
 This is cleaned data from the National Health and Nutrition Examination Survey Data I Epidemiologic Follow-up Study provided in Hernan and Robins' book [_What if_](https://miguelhernan.org/whatifbook). Codebook available [here](https://github.com/BiomedSciAI/causallib/blob/master/causallib/datasets/data/nhefs/NHEFS_codebook.csv). N = 1,629.

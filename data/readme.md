@@ -76,7 +76,7 @@ This is the replication data from [Do learning communities increase first year c
 | `GPAyr2` | Second-year grade point average |
 | **Covariates** |  |
 | `Cohort` | Student cohort/year |
-| `Gender` | Student gender |
+| `Gender` | Student gender (0=male, 1=female) |
 | `Highschool_GPA` | High school grade point average |
 | `Cen_HSGPA` | Centered high school GPA (standardized) |
 | `SAT_Verbal` | SAT verbal score |
